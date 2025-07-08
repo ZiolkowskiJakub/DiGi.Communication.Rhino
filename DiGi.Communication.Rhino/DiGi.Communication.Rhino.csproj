@@ -2,6 +2,7 @@
 
   <PropertyGroup>
 	  <TargetFramework>net8.0-windows</TargetFramework>
+	  <LangVersion>12.0</LangVersion>
 	  <OutputPath>..\bin\</OutputPath>
 	  <Title>DiGi.Communication.Rhino</Title>
 	  <Description>DiGi.Communication.Rhino</Description>
