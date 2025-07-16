@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<LangVersion>12.0</LangVersion>
+		<OutputPath>..\bin\</OutputPath>
+		<Title>DiGi.Communication.Rhino</Title>
+		<Description>DiGi.Communication.Rhino</Description>
+		<TargetExt>.dll</TargetExt>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Grasshopper" Version="8.19.25132.1001" IncludeAssets="compile;build" />
+		<PackageReference Include="System.Text.Json" Version="9.0.6" />
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Copy SourceFiles="$(TargetPath)" DestinationFiles="$(TargetDir)$(TargetName).gha" />
+	</Target>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\DiGi.Communication.Rhino\DiGi.Communication.Rhino.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="DiGi.Communication">
+			<HintPath>..\..\DiGi.Communication\bin\DiGi.Communication.dll</HintPath>
+		</Reference>
+		<Reference Include="DiGi.Communication.ComputeSharp">
+		  <HintPath>..\..\DiGi.Communication\bin\DiGi.Communication.ComputeSharp.dll</HintPath>
+		</Reference>
+		<Reference Include="DiGi.Core">
+			<HintPath>..\..\DiGi.Core\bin\DiGi.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="DiGi.Geometry">
+			<HintPath>..\..\DiGi.Geometry\bin\DiGi.Geometry.dll</HintPath>
+		</Reference>
+		<Reference Include="DiGi.Rhino.Core">
+			<HintPath>..\..\DiGi.Rhino\bin\DiGi.Rhino.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="DiGi.Rhino.Geometry">
+			<HintPath>..\..\DiGi.Rhino\bin\DiGi.Rhino.Geometry.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>

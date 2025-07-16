@@ -23,7 +23,7 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                return Value?.GetPoints()?.ToArray<IGeometry>();
+                return Value?.Points?.ToArray<IGeometry>();
             }
         }
 

@@ -1,20 +1,18 @@
-﻿using DiGi.Geometry.Spatial.Classes;
-using DiGi.Rhino.Core.Classes;
+﻿using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using DiGi.Rhino.Geometry.Spatial.Classes;
 using Grasshopper.Kernel;
-using Grasshopper.Kernel.Parameters;
 using System;
 using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
-    public class ScatteringObject : VariableParameterComponent
+    public class Antenna : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("bc1c20b0-ddf9-4f6e-9c36-0ab1bb0a2753");
+        public override Guid ComponentGuid => new Guid("28e14ad3-3a74-4f27-a19e-348ddc68a002");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -26,9 +24,9 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public ScatteringObject()
-          : base("Communication.ScatteringObject", "Communication.ScatteringObject",
-              "Creates ScatteringObject",
+        public Antenna()
+          : base("Communication.Antenna", "Communication.Antenna",
+              "Creates Antenna",
               "DiGi", "DiGi.Communication")
         {
         }
@@ -41,8 +39,8 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooMesh3DParam() { Name = "Mesh3D", NickName = "Mesh3D", Description = "DiGi Geometry Mesh3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Param_String() { Name = "Reference", NickName = "Reference", Description = "Reference", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
+                result.Add(new Param(new GooPoint3DParam() { Name = "Location", NickName = "Location", Description = "Location", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooEnumParam() { Name = "Functions", NickName = "Functions", Description = "Functions", Access = GH_ParamAccess.list, Optional = true }, ParameterVisibility.Voluntary));
 
                 return result.ToArray();
             }
@@ -56,7 +54,7 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooScatteringObjectParam() { Name = "ScatteringObject", NickName = "ScatteringObject", Description = "DiGi Communication Scattering Object", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooAntennaParam() { Name = "Antenna", NickName = "Antenna", Description = "DiGi Communication Antenna", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -71,27 +69,32 @@ namespace DiGi.Communication.Rhino.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("Mesh3D");
-            Mesh3D mesh3D = null;
-            if (index == -1 || !dataAccess.GetData(index, ref mesh3D) || mesh3D == null)
+            index = Params.IndexOfInputParam("Location");
+            Geometry.Spatial.Classes.Point3D location = null;
+            if (index == -1 || !dataAccess.GetData(index, ref location) || location == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            string reference = null;
-            index = Params.IndexOfInputParam("Reference");
+            index = Params.IndexOfInputParam("Functions");
+            List<Enums.Function> functions = new List<Enums.Function>();
             if (index != -1)
             {
-                dataAccess.GetData(index, ref reference);
+                dataAccess.GetDataList(index, functions);
             }
 
-            Communication.Classes.ScatteringObject scatteringObject = new Communication.Classes.ScatteringObject(reference, mesh3D);
+            if(functions == null || functions.Count == 0)
+            {
+                functions = [Enums.Function.Transmitter, Enums.Function.Receiver];
+            }
 
-            index = Params.IndexOfOutputParam("ScatteringObject");
+            Communication.Classes.Antenna antenna = new Communication.Classes.Antenna(location, functions.ToArray());
+
+            index = Params.IndexOfOutputParam("Antenna");
             if (index != -1)
             {
-                dataAccess.SetData(index, scatteringObject == null ? null : new GooScatteringObject(scatteringObject));
+                dataAccess.SetData(index, antenna == null ? null : new GooAntenna(antenna));
             }
         }
     }

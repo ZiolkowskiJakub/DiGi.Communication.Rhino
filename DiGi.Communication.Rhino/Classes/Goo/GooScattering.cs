@@ -1,19 +1,21 @@
-﻿using DiGi.Geometry.Core.Interfaces;
+﻿using DiGi.Communication.Classes;
+using DiGi.Communication.Interfaces;
+using DiGi.Geometry.Core.Interfaces;
 using DiGi.Rhino.Geometry.Core.Classes;
 using Grasshopper.Kernel.Types;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
-    public class GooScattering : GooBakeAwareSerializableObject<Communication.Classes.Scattering>
+    public class GooScattering : GooBakeAwareSerializableObject<IScattering>
     {
         public GooScattering()
             : base()
         {
         }
 
-        public GooScattering(Communication.Classes.Scattering scattering)
+        public GooScattering(IScattering scattering)
         {
             Value = scattering;
         }
@@ -22,7 +24,19 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                return Value?.GetPolylines()?.ToArray<IGeometry>();
+                List<ScatteringPointGroup> scatteringPointGroups = Value?.ScatteringPointGroups;
+                if(scatteringPointGroups == null)
+                {
+                    return null;
+                }
+
+                List<IGeometry> geometries = new List<IGeometry>();
+                foreach(ScatteringPointGroup scatteringPointGroup in scatteringPointGroups)
+                {
+                    scatteringPointGroup?.Points?.ForEach(x => geometries.Add(x));
+                }
+
+                return geometries.ToArray();
             }
         }
 
@@ -33,7 +47,7 @@ namespace DiGi.Communication.Rhino.Classes
 
     }
 
-    public class GooScatteringParam : GooBakeAwareSerializableParam<GooScattering, Communication.Classes.Scattering>
+    public class GooScatteringParam : GooBakeAwareSerializableParam<GooScattering, IScattering>
     {
         public override Guid ComponentGuid => new Guid("760f3e12-4622-4efb-862f-90e15b7532b8");
 

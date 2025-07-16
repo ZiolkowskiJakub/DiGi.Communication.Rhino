@@ -1,6 +1,6 @@
 ﻿using DiGi.Communication.Classes;
-using DiGi.Communication.Rhino.Classes;
 using DiGi.Rhino.Core.Classes;
+using DiGi.Rhino.Geometry.Spatial.Classes;
 using Grasshopper.Kernel.Types;
 using System.Collections;
 
@@ -20,7 +20,7 @@ namespace DiGi.Communication.Rhino
             return new GH_String(scatteringPointGroup.Reference);
         }
 
-        [Inspect("ScatteringPoints", "ScatteringPoints", "ScatteringPoints")]
+        [Inspect("Points", "Points", "Points")]
         public static IEnumerable ScatteringPoints(this ScatteringPointGroup scatteringPointGroup)
         {
             if (scatteringPointGroup == null)
@@ -28,7 +28,7 @@ namespace DiGi.Communication.Rhino
                 return null;
             }
 
-            return scatteringPointGroup.ScatteringPoints?.ConvertAll(x => new GooScatteringPoint(x));
+            return scatteringPointGroup.Points?.ConvertAll(x => new GooPoint3D(x));
         }
     }
 }

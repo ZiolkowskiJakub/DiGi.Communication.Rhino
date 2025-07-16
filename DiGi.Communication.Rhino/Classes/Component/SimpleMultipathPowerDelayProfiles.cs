@@ -1,20 +1,18 @@
-﻿using DiGi.Geometry.Spatial.Classes;
+﻿using DiGi.Communication.Rhino.Classes.Goo;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
-using DiGi.Rhino.Geometry.Spatial.Classes;
 using Grasshopper.Kernel;
-using Grasshopper.Kernel.Parameters;
 using System;
 using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
-    public class ScatteringObject : VariableParameterComponent
+    public class SimpleMultipathPowerDelayProfile : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("bc1c20b0-ddf9-4f6e-9c36-0ab1bb0a2753");
+        public override Guid ComponentGuid => new Guid("e970f03b-2557-4407-8551-601ae19ab301");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -26,9 +24,9 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public ScatteringObject()
-          : base("Communication.ScatteringObject", "Communication.ScatteringObject",
-              "Creates ScatteringObject",
+        public SimpleMultipathPowerDelayProfile()
+          : base("Communication.SimpleMultipathPowerDelayProfile", "Communication.SimpleMultipathPowerDelayProfile",
+              "Creates SimpleMultipathPowerDelayProfile",
               "DiGi", "DiGi.Communication")
         {
         }
@@ -41,8 +39,7 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooMesh3DParam() { Name = "Mesh3D", NickName = "Mesh3D", Description = "DiGi Geometry Mesh3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Param_String() { Name = "Reference", NickName = "Reference", Description = "Reference", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
+                result.Add(new Param(new GooEnumParam() { Name = "DefaultSimpleMultipathPowerDelayProfile", NickName = "DefaultSimpleMultipathPowerDelayProfile", Description = "DefaultSimpleMultipathPowerDelayProfile Enum", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
 
                 return result.ToArray();
             }
@@ -56,7 +53,7 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooScatteringObjectParam() { Name = "ScatteringObject", NickName = "ScatteringObject", Description = "DiGi Communication Scattering Object", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooSimpleMultipathPowerDelayProfileParam() { Name = "SimpleMultipathPowerDelayProfile", NickName = "SimpleMultipathPowerDelayProfile", Description = "DiGi Communication SimpleMultipathPowerDelayProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -71,27 +68,20 @@ namespace DiGi.Communication.Rhino.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("Mesh3D");
-            Mesh3D mesh3D = null;
-            if (index == -1 || !dataAccess.GetData(index, ref mesh3D) || mesh3D == null)
+            index = Params.IndexOfInputParam("DefaultSimpleMultipathPowerDelayProfile");
+            Enums.DefaultSimpleMultipathPowerDelayProfile defaultSimpleMultipathPowerDelayProfile = Enums.DefaultSimpleMultipathPowerDelayProfile.TypicalUrban;
+            if (index == -1 || !dataAccess.GetData(index, ref defaultSimpleMultipathPowerDelayProfile))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            string reference = null;
-            index = Params.IndexOfInputParam("Reference");
+            Communication.Classes.SimpleMultipathPowerDelayProfile simpleMultipathPowerDelayProfile = Create.SimpleMultipathPowerDelayProfile(defaultSimpleMultipathPowerDelayProfile);
+
+            index = Params.IndexOfOutputParam("SimpleMultipathPowerDelayProfile");
             if (index != -1)
             {
-                dataAccess.GetData(index, ref reference);
-            }
-
-            Communication.Classes.ScatteringObject scatteringObject = new Communication.Classes.ScatteringObject(reference, mesh3D);
-
-            index = Params.IndexOfOutputParam("ScatteringObject");
-            if (index != -1)
-            {
-                dataAccess.SetData(index, scatteringObject == null ? null : new GooScatteringObject(scatteringObject));
+                dataAccess.SetData(index, simpleMultipathPowerDelayProfile == null ? null : new GooSimpleMultipathPowerDelayProfile(simpleMultipathPowerDelayProfile));
             }
         }
     }
