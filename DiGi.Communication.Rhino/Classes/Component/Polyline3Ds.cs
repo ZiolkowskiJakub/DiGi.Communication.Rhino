@@ -1,4 +1,5 @@
 ﻿using DiGi.Communication.Interfaces;
+using DiGi.Geometry.Spatial.Classes;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using DiGi.Rhino.Geometry.Spatial.Classes;
@@ -9,12 +10,12 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
-    public class Ellipsoid : VariableParameterComponent
+    public class Polyline3Ds : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("2e7e8de0-9110-49ae-bfd4-625b4489ab65");
+        public override Guid ComponentGuid => new Guid("a8479a5e-031d-4d17-9a5d-6d433c82b756");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -26,9 +27,9 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public Ellipsoid()
-          : base("Communication.Ellipsoid", "Communication.Ellipsoid",
-              "Creates Ellipsoid",
+        public Polyline3Ds()
+          : base("Communication.Polyline3Ds", "Communication.Polyline3Ds",
+              "Creates Polyline3Ds",
               "DiGi", "DiGi.Communication")
         {
         }
@@ -41,15 +42,10 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooAntennaParam() { Name = "Antenna_1", NickName = "Antenna_1", Description = "First antenna", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooAntennaParam() { Name = "Antenna_2", NickName = "Antenna_2", Description = "Second antenna", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooScatteringProfileParam() { Name = "ScatteringProfile", NickName = "ScatteringProfile", Description = "DiGi Communication ScatteringProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 result.Add(new Param(new Param_Number() { Name = "Delay", NickName = "Delay", Description = "Delay [μm]", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
 
-                Param_Number param_Number;
-
-                param_Number = new Param_Number() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(Core.Constans.Tolerance.Distance);
-                result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
+                result.Add(new Param(new Param_String() { Name = "References", NickName = "References", Description = "References", Access = GH_ParamAccess.list, Optional = true }, ParameterVisibility.Voluntary));
 
                 return result.ToArray();
             }
@@ -63,7 +59,7 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooEllipsoidParam() { Name = "Ellipsoid", NickName = "Ellipsoid", Description = "DiGi Ellipsoid", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooPolyline3DParam() { Name = "Polyline3Ds", NickName = "Polyline3Ds", Description = "DiGi Geometry Polyline3Ds", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -78,17 +74,9 @@ namespace DiGi.Communication.Rhino.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("Antenna_1");
-            IAntenna antenna_1 = null;
-            if (index == -1 || !dataAccess.GetData(index, ref antenna_1) || antenna_1 == null)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
-                return;
-            }
-
-            index = Params.IndexOfInputParam("Antenna_2");
-            IAntenna antenna_2 = null;
-            if (index == -1 || !dataAccess.GetData(index, ref antenna_2) || antenna_2 == null)
+            index = Params.IndexOfInputParam("ScatteringProfile");
+            IScatteringProfile scatteringProfile = null;
+            if (index == -1 || !dataAccess.GetData(index, ref scatteringProfile) || scatteringProfile == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
@@ -104,19 +92,28 @@ namespace DiGi.Communication.Rhino.Classes
 
             delay = Core.Query.Round(delay * 1e-6, 1e-12);
 
-            double tolerance = Core.Constans.Tolerance.Distance;
-            index = Params.IndexOfInputParam("Tolerance");
-            if (index != -1)
+
+            List<string> references = new List<string>();
+            index = Params.IndexOfInputParam("References");
+            if(index != -1)
             {
-                dataAccess.GetData(index, ref tolerance);
+                if(!dataAccess.GetDataList(index, references))
+                {
+                    references = new List<string>();
+                }
             }
 
-            Geometry.Spatial.Classes.Ellipsoid ellipsoid = Create.Ellipsoid(antenna_1, antenna_2, delay, tolerance);
+            if(references != null && references.Count == 0)
+            {
+                references = null;
+            }
 
-            index = Params.IndexOfOutputParam("Ellipsoid");
+            List<Polyline3D> polyline3Ds = Query.Polyline3Ds(scatteringProfile, delay, references);
+
+            index = Params.IndexOfOutputParam("Polyline3Ds");
             if (index != -1)
             {
-                dataAccess.SetData(index, ellipsoid == null ? null : new GooEllipsoid(ellipsoid));
+                dataAccess.SetData(index, polyline3Ds?.ConvertAll(x => new GooPolyline3D(x)));
             }
         }
     }

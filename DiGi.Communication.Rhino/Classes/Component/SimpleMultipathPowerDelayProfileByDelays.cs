@@ -87,7 +87,7 @@ namespace DiGi.Communication.Rhino.Classes
                 return;
             }
 
-            delays = delays.ConvertAll(x => x * 1e-6);
+            delays = delays.ConvertAll(x => Core.Query.Round(x * 1e-6, 1e-12));
 
             int count = Math.Max(delays.Count, powers.Count);
             delays.Extend(count);

@@ -10,6 +10,28 @@ namespace DiGi.Communication.Rhino
 
     public static partial class Inspect
     {
+        [Inspect("AngularPowerDistributionProfiles", "AngularPowerDistributionProfiles", "AngularPowerDistributionProfiles")]
+        public static IEnumerable AngularPowerDistributionProfiles(this Communication.Classes.GeometricalPropagationModel geometricalPropagationModel)
+        {
+            if (geometricalPropagationModel == null)
+            {
+                return null;
+            }
+
+            List<IAngularPowerDistributionProfile> angularPowerDistributionProfiles = geometricalPropagationModel.GetAngularPowerDistributionProfiles<IAngularPowerDistributionProfile>();
+            if (angularPowerDistributionProfiles == null)
+            {
+                return null;
+            }
+
+            List<GooAngularPowerDistributionProfile> result = new List<GooAngularPowerDistributionProfile>();
+            foreach (IAngularPowerDistributionProfile angularPowerDistributionProfile in angularPowerDistributionProfiles)
+            {
+                result.Add(new GooAngularPowerDistributionProfile(angularPowerDistributionProfile));
+            }
+
+            return result;
+        }
 
         [Inspect("Antennas", "Antennas", "Antennas")]
         public static IEnumerable Antennas(this Communication.Classes.GeometricalPropagationModel geometricalPropagationModel)
@@ -29,29 +51,6 @@ namespace DiGi.Communication.Rhino
             foreach(IAntenna antenna in antennas)
             {
                 result.Add(new GooAntenna(antenna));
-            }
-
-            return result;
-        }
-
-        [Inspect("ScatteringObjects", "ScatteringObjects", "ScatteringObjects")]
-        public static IEnumerable ScatteringObjects(this Communication.Classes.GeometricalPropagationModel geometricalPropagationModel)
-        {
-            if (geometricalPropagationModel == null)
-            {
-                return null;
-            }
-
-            List<IScatteringObject> scatteringObjects = geometricalPropagationModel.GetScatteringObjects<IScatteringObject>();
-            if (scatteringObjects == null)
-            {
-                return null;
-            }
-
-            List<GooScatteringObject> result = new List<GooScatteringObject>();
-            foreach (IScatteringObject scatteringObject in scatteringObjects)
-            {
-                result.Add(new GooScatteringObject(scatteringObject));
             }
 
             return result;
@@ -80,6 +79,29 @@ namespace DiGi.Communication.Rhino
             return result;
         }
 
+        [Inspect("ScatteringObjects", "ScatteringObjects", "ScatteringObjects")]
+        public static IEnumerable ScatteringObjects(this Communication.Classes.GeometricalPropagationModel geometricalPropagationModel)
+        {
+            if (geometricalPropagationModel == null)
+            {
+                return null;
+            }
+
+            List<IScatteringObject> scatteringObjects = geometricalPropagationModel.GetScatteringObjects<IScatteringObject>();
+            if (scatteringObjects == null)
+            {
+                return null;
+            }
+
+            List<GooScatteringObject> result = new List<GooScatteringObject>();
+            foreach (IScatteringObject scatteringObject in scatteringObjects)
+            {
+                result.Add(new GooScatteringObject(scatteringObject));
+            }
+
+            return result;
+        }
+        
         [Inspect("ScatteringProfiles", "ScatteringProfiles", "ScatteringProfiles")]
         public static IEnumerable ScatteringProfiles(this Communication.Classes.GeometricalPropagationModel geometricalPropagationModel)
         {

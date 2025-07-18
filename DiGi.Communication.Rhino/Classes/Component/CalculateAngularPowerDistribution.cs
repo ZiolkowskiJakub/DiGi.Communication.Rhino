@@ -1,7 +1,4 @@
-﻿using DiGi.Communication.Classes;
-using DiGi.Communication.Interfaces;
-using DiGi.Communication.Rhino.Classes;
-using DiGi.Core.Classes;
+﻿using DiGi.Communication.Rhino.Classes;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
@@ -9,14 +6,14 @@ using Grasshopper.Kernel.Parameters;
 using System;
 using System.Collections.Generic;
 
-namespace DiGi.Communication.ComputeSharp.Rhino.Classes
+namespace DiGi.Communication.Rhino.Classes
 {
-    public class CalculateScattering : VariableParameterComponent
+    public class CalculateAngularPowerDistribution : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("f22be95a-de19-4379-a31f-966b65ea9884");
+        public override Guid ComponentGuid => new Guid("25da38ff-35dd-418d-8d0e-b961ed9995e2");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -28,9 +25,9 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public CalculateScattering()
-          : base("Communication.CalculateScattering", "Communication.CalculateScattering",
-              "Calculates Scattering",
+        public CalculateAngularPowerDistribution()
+          : base("Communication.CalculateAngularPowerDistribution", "Communication.CalculateAngularPowerDistribution",
+              "Calculates angular power distribution",
               "DiGi", "DiGi.Communication")
         {
         }
@@ -45,19 +42,13 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
                 List<Param> result = new List<Param>();
                 result.Add(new Param(new GooGeometricalPropagationModelParam() { Name = "GeometricalPropagationModel", NickName = "GeometricalPropagationModel", Description = "GeometricalPropagationModel", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
 
-                Param_Number param_Number;
+                Param_Integer param_Integer = new Param_Integer() { Name = "RayCount", NickName = "RayCount", Description = "Ray count", Access = GH_ParamAccess.item, Optional = true };
+                param_Integer.SetPersistentData(1);
+                result.Add(new Param(param_Integer, ParameterVisibility.Voluntary));
 
-                param_Number = new Param_Number() { Name = "PointDensityFactor", NickName = "PointDensityFactor", Description = "Point Density Factor", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(Constans.Factor.PointDensity);
-                result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
-
-                param_Number = new Param_Number() { Name = "AngleFactor", NickName = "AngleFactor", Description = "Angle Factor", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(Constans.Factor.Angle);
-                result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
-
-                param_Number = new Param_Number() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(Core.Constans.Tolerance.Distance);
-                result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
+                Param_Number param_Number = new Param_Number() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
+                param_Integer.SetPersistentData(Core.Constans.Tolerance.Distance);
+                result.Add(new Param(param_Integer, ParameterVisibility.Voluntary));
 
                 return result.ToArray();
             }
@@ -72,7 +63,7 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
             {
                 List<Param> result = new List<Param>();
                 result.Add(new Param(new GooGeometricalPropagationModelParam() { Name = "GeometricalPropagationModel", NickName = "GeometricalPropagationModel", Description = "DiGi Communication GeometricalPropagationModel", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooScatteringProfileParam() { Name = "ScatteringProfiles", NickName = "ScatteringProfiles", Description = "DiGi Communication ScatteringProfiles", Access = GH_ParamAccess.list }, ParameterVisibility.Voluntary));
+                result.Add(new Param(new GooAngularPowerDistributionProfileParam() { Name = "AngularPowerDistributionProfiles", NickName = "AngularPowerDistributionProfiles", Description = "DiGi Communication AngularPowerDistributionProfiles", Access = GH_ParamAccess.list }, ParameterVisibility.Voluntary));
                 result.Add(new Param(new Param_Boolean() { Name = "Succeeded", NickName = "Succeeded", Description = "Succeeded", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
@@ -102,18 +93,11 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
                 return;
             }
 
-            double pointDensityFactor = Constans.Factor.PointDensity;
-            index = Params.IndexOfInputParam("PointDensityFactor");
+            int rayCount = 1;
+            index = Params.IndexOfInputParam("RayCount");
             if (index != -1)
             {
-                dataAccess.GetData(index, ref pointDensityFactor);
-            }
-
-            double angleFactor = Constans.Factor.Angle;
-            index = Params.IndexOfInputParam("AngleFactor");
-            if (index != -1)
-            {
-                dataAccess.GetData(index, ref angleFactor);
+                dataAccess.GetData(index, ref rayCount);
             }
 
             double tolerance = Core.Constans.Tolerance.Distance;
@@ -125,21 +109,20 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
 
             geometricalPropagationModel = new Communication.Classes.GeometricalPropagationModel(geometricalPropagationModel);
 
-            ComputeSharp.Classes.ScatteringCalculatorOptions scatteringCalculatorOptions = new ComputeSharp.Classes.ScatteringCalculatorOptions()
+            Communication.Classes.AngularPowerDistributionCalculatorOptions angularPowerDistributionCalculatorOptions = new Communication.Classes.AngularPowerDistributionCalculatorOptions()
             {
-                PointDensityFactor = pointDensityFactor,
-                AngleFactor = angleFactor,
+                RayCount = rayCount,
                 Tolerance = tolerance,
             };
 
-            ComputeSharp.Classes.ScatteringCalculator scatteringCalculator = new ComputeSharp.Classes.ScatteringCalculator()
+            Communication.Classes.AngularPowerDistributionCalculator angularPowerDistributionCalculator = new Communication.Classes.AngularPowerDistributionCalculator()
             {
                 GeometricalPropagationModel = geometricalPropagationModel,
-                ScatteringCalculatorOptions = scatteringCalculatorOptions
+                AngularPowerDistributionCalculatorOptions = angularPowerDistributionCalculatorOptions
 
             };
 
-            bool succedded = scatteringCalculator.Calculate();
+            bool succedded = angularPowerDistributionCalculator.Calculate();
 
             index = Params.IndexOfOutputParam("GeometricalPropagationModel");
             if (index != -1)
@@ -147,10 +130,10 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
                 dataAccess.SetData(index, geometricalPropagationModel == null ? null : new GooGeometricalPropagationModel(geometricalPropagationModel));
             }
 
-            index = Params.IndexOfOutputParam("ScatteringProfiles");
+            index = Params.IndexOfOutputParam("AngularPowerDistributionProfiles");
             if (index != -1)
             {
-                dataAccess.SetDataList(index, scatteringCalculator?.ScatteringProfiles?.ConvertAll(x => new GooScatteringProfile(x)));
+                dataAccess.SetDataList(index, angularPowerDistributionCalculator?.AngularPowerDistributionProfiles?.ConvertAll(x => new GooAngularPowerDistributionProfile(x)));
             }
 
             if (index_Succeeded != -1)

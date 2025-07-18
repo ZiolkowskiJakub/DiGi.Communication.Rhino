@@ -1,4 +1,5 @@
-﻿using DiGi.Communication.Interfaces;
+﻿using DiGi.Communication.Classes;
+using DiGi.Communication.Interfaces;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using DiGi.Rhino.Geometry.Spatial.Classes;
@@ -9,12 +10,12 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
-    public class Ellipsoid : VariableParameterComponent
+    public class Rays : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("2e7e8de0-9110-49ae-bfd4-625b4489ab65");
+        public override Guid ComponentGuid => new Guid("77978b5a-9aa0-43e8-af02-9f44a42f052e");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -26,9 +27,9 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public Ellipsoid()
-          : base("Communication.Ellipsoid", "Communication.Ellipsoid",
-              "Creates Ellipsoid",
+        public Rays()
+          : base("Communication.Rays", "Communication.Rays",
+              "Gets Rays",
               "DiGi", "DiGi.Communication")
         {
         }
@@ -41,15 +42,10 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooAntennaParam() { Name = "Antenna_1", NickName = "Antenna_1", Description = "First antenna", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooAntennaParam() { Name = "Antenna_2", NickName = "Antenna_2", Description = "Second antenna", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooAngularPowerDistributionProfileParam() { Name = "AngularPowerDistributionProfile", NickName = "AngularPowerDistributionProfile", Description = "AngularPowerDistributionProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 result.Add(new Param(new Param_Number() { Name = "Delay", NickName = "Delay", Description = "Delay [μm]", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
 
-                Param_Number param_Number;
-
-                param_Number = new Param_Number() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(Core.Constans.Tolerance.Distance);
-                result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
+                result.Add(new Param(new Param_Number() { Name = "Factor", NickName = "Factor", Description = "Factor", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
 
                 return result.ToArray();
             }
@@ -63,7 +59,7 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooEllipsoidParam() { Name = "Ellipsoid", NickName = "Ellipsoid", Description = "DiGi Ellipsoid", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooRayParam() { Name = "Rays", NickName = "Rays", Description = "DiGi Rays", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -78,17 +74,9 @@ namespace DiGi.Communication.Rhino.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("Antenna_1");
-            IAntenna antenna_1 = null;
-            if (index == -1 || !dataAccess.GetData(index, ref antenna_1) || antenna_1 == null)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
-                return;
-            }
-
-            index = Params.IndexOfInputParam("Antenna_2");
-            IAntenna antenna_2 = null;
-            if (index == -1 || !dataAccess.GetData(index, ref antenna_2) || antenna_2 == null)
+            index = Params.IndexOfInputParam("AngularPowerDistributionProfile");
+            IAngularPowerDistributionProfile angularPowerDistributionProfile = null;
+            if (index == -1 || !dataAccess.GetData(index, ref angularPowerDistributionProfile) || angularPowerDistributionProfile == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
@@ -102,21 +90,24 @@ namespace DiGi.Communication.Rhino.Classes
                 return;
             }
 
-            delay = Core.Query.Round(delay * 1e-6, 1e-12);
-
-            double tolerance = Core.Constans.Tolerance.Distance;
-            index = Params.IndexOfInputParam("Tolerance");
+            double factor = 1.0;
+            index = Params.IndexOfInputParam("Factor");
             if (index != -1)
             {
-                dataAccess.GetData(index, ref tolerance);
+                if(!dataAccess.GetData(index, ref factor) || double.IsNaN(factor))
+                {
+                    factor = 1.0;
+                }
             }
 
-            Geometry.Spatial.Classes.Ellipsoid ellipsoid = Create.Ellipsoid(antenna_1, antenna_2, delay, tolerance);
+            delay = Core.Query.Round(delay * 1e-6, 1e-12);
 
-            index = Params.IndexOfOutputParam("Ellipsoid");
+            List<Ray> rays = Query.Scale(angularPowerDistributionProfile.GetRays(delay), factor);
+
+            index = Params.IndexOfOutputParam("Rays");
             if (index != -1)
             {
-                dataAccess.SetData(index, ellipsoid == null ? null : new GooEllipsoid(ellipsoid));
+                dataAccess.SetDataList(index, rays?.ConvertAll(x => new GooRay(x)));
             }
         }
     }

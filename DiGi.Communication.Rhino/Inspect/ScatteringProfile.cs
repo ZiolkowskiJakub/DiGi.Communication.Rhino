@@ -2,6 +2,7 @@
 using DiGi.Communication.Rhino.Classes;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Geometry.Spatial.Classes;
+using Grasshopper.Kernel.Types;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -93,6 +94,17 @@ namespace DiGi.Communication.Rhino
             }
 
             return result;
+        }
+
+        [Inspect("Visible", "Visible", "Visible")]
+        public static GH_Boolean Visible(this Interfaces.IScatteringProfile scatteringProfile)
+        {
+            if (scatteringProfile == null)
+            {
+                return null;
+            }
+
+            return new GH_Boolean(scatteringProfile.Visible);
         }
     }
 }
