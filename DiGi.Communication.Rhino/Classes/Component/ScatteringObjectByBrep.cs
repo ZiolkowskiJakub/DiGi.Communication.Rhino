@@ -1,7 +1,6 @@
 ﻿using DiGi.Geometry.Spatial.Classes;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
-using DiGi.Rhino.Geometry.Spatial.Classes;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
 using System;
@@ -9,12 +8,12 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
-    public class ScatteringObject : VariableParameterComponent
+    public class ScatteringObjectByBrep : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("bc1c20b0-ddf9-4f6e-9c36-0ab1bb0a2753");
+        public override Guid ComponentGuid => new Guid("736b1a41-efe1-4e70-b04e-94b27db8ddf9");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -26,9 +25,9 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public ScatteringObject()
-          : base("Communication.ScatteringObject", "Communication.ScatteringObject",
-              "Creates ScatteringObject",
+        public ScatteringObjectByBrep()
+          : base("Communication.ScatteringObjectByBrep", "Communication.ScatteringObjectByBrep",
+              "Creates ScatteringObject by brep",
               "DiGi", "DiGi.Communication")
         {
         }
@@ -41,7 +40,7 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooMesh3DParam() { Name = "Mesh3D", NickName = "Mesh3D", Description = "DiGi Geometry Mesh3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new Param_Brep() { Name = "Brep", NickName = "Brep", Description = "Brep", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 result.Add(new Param(new Param_String() { Name = "Reference", NickName = "Reference", Description = "Reference", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
 
                 result.Add(new Param(new Param_Number() { Name = "ScatteringCoefficient", NickName = "ScatteringCoefficient", Description = "ScatteringCoefficient", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
@@ -58,7 +57,7 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooScatteringObjectParam() { Name = "ScatteringObject", NickName = "ScatteringObject", Description = "DiGi Communication Scattering Object", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooScatteringObjectParam() { Name = "ScatteringObjects", NickName = "ScatteringObjects", Description = "DiGi Communication Scattering Objects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -73,9 +72,9 @@ namespace DiGi.Communication.Rhino.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("Mesh3D");
-            Mesh3D mesh3D = null;
-            if (index == -1 || !dataAccess.GetData(index, ref mesh3D) || mesh3D == null)
+            index = Params.IndexOfInputParam("Brep");
+            global::Rhino.Geometry.Brep brep = null;
+            if (index == -1 || !dataAccess.GetData(index, ref brep) || brep == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
@@ -92,18 +91,35 @@ namespace DiGi.Communication.Rhino.Classes
             index = Params.IndexOfInputParam("ScatteringCoefficient");
             if (index != -1)
             {
-                if(!dataAccess.GetData(index, ref scatteringCoefficient))
+                if (!dataAccess.GetData(index, ref scatteringCoefficient))
                 {
                     scatteringCoefficient = 1;
                 }
             }
 
-            Communication.Classes.ScatteringObject scatteringObject = new Communication.Classes.ScatteringObject(reference, mesh3D, scatteringCoefficient);
+            global::Rhino.Geometry.Mesh[] meshes = global::Rhino.Geometry.Mesh.CreateFromBrep(brep, new global::Rhino.Geometry.MeshingParameters(0.5));
 
-            index = Params.IndexOfOutputParam("ScatteringObject");
+            List<Communication.Classes.ScatteringObject> scatteringObjects = null;
+            if(meshes != null)
+            {
+                scatteringObjects = new List<Communication.Classes.ScatteringObject>();
+                foreach (global::Rhino.Geometry.Mesh mesh in meshes)
+                {
+                    Mesh3D mesh3D = DiGi.Rhino.Geometry.Spatial.Convert.ToDiGi(mesh);
+                    if (mesh3D == null)
+                    {
+                        continue;
+                    }
+
+                    Communication.Classes.ScatteringObject scatteringObject = new Communication.Classes.ScatteringObject(reference, mesh3D, scatteringCoefficient);
+                    scatteringObjects.Add(scatteringObject);
+                }
+            }
+
+            index = Params.IndexOfOutputParam("ScatteringObjects");
             if (index != -1)
             {
-                dataAccess.SetData(index, scatteringObject == null ? null : new GooScatteringObject(scatteringObject));
+                dataAccess.SetDataList(index, scatteringObjects?.ConvertAll(x => new GooScatteringObject(x)));
             }
         }
     }

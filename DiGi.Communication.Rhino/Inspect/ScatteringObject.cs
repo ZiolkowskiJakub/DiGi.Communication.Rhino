@@ -28,5 +28,16 @@ namespace DiGi.Communication.Rhino
 
             return new GooMesh3D(scatteringObject.Mesh3D);
         }
+
+        [Inspect("ScatteringCoefficient", "ScatteringCoefficient", "Scattering coefficient")]
+        public static GH_Number ScatteringCoefficient(this Interfaces.IScatteringObject scatteringObject)
+        {
+            if (scatteringObject == null)
+            {
+                return null;
+            }
+
+            return new GH_Number(scatteringObject.ScatteringCoefficient);
+        }
     }
 }
