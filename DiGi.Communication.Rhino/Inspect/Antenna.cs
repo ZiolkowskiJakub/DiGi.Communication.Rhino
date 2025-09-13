@@ -11,29 +11,27 @@ namespace DiGi.Communication.Rhino
     {
 
         [Inspect("Location", "Location", "Location")]
-        public static GooPoint3D Location(this Interfaces.IAntenna antenna)
+        public static GooPoint3D? Location(this Interfaces.IAntenna? antenna)
         {
             if (antenna == null)
             {
                 return null;
             }
 
-            Geometry.Spatial.Classes.Point3D location = antenna.Location;
+            Geometry.Spatial.Classes.Point3D? location = antenna.Location;
         
             return location == null ? null : new GooPoint3D(location);
         }
 
         [Inspect("Functions", "Functions", "Functions")]
-        public static IEnumerable Functions(this Interfaces.IAntenna antenna)
+        public static IEnumerable? Functions(this Interfaces.IAntenna? antenna)
         {
-            if (antenna == null)
+            if(antenna?.Functions is not HashSet<Function> functions)
             {
                 return null;
             }
 
-            HashSet<Function> functions = antenna.Functions;
-
-            List<GooEnum> result = new List<GooEnum>();
+            List<GooEnum> result = [];
             foreach (Function function in functions) 
             {
                 result.Add(new GooEnum(function));

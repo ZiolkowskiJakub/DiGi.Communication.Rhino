@@ -10,7 +10,7 @@ namespace DiGi.Communication.Rhino
     {
 
         [Inspect("Vectors", "Vectors", "Vectors")]
-        public static IEnumerable Vectors(this Interfaces.IAngularPowerDistribution angularPowerDistribution)
+        public static IEnumerable? Vectors(this Interfaces.IAngularPowerDistribution? angularPowerDistribution)
         {
             if (angularPowerDistribution == null)
             {
@@ -21,7 +21,7 @@ namespace DiGi.Communication.Rhino
         }
 
         [Inspect("Delay", "Delay", "Delay [μm]")]
-        public static GH_Number Delay(this Interfaces.IAngularPowerDistribution angularPowerDistribution)
+        public static GH_Number? Delay(this Interfaces.IAngularPowerDistribution? angularPowerDistribution)
         {
             if (angularPowerDistribution == null)
             {
@@ -32,7 +32,7 @@ namespace DiGi.Communication.Rhino
         }
 
         [Inspect("Power", "Power", "Power")]
-        public static GH_Number Power(this Interfaces.IAngularPowerDistribution angularPowerDistribution)
+        public static GH_Number? Power(this Interfaces.IAngularPowerDistribution? angularPowerDistribution)
         {
             if (angularPowerDistribution == null)
             {

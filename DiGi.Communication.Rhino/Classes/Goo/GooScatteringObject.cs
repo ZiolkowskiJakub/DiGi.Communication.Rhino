@@ -14,16 +14,16 @@ namespace DiGi.Communication.Rhino.Classes
         {
         }
 
-        public GooScatteringObject(IScatteringObject scattering)
+        public GooScatteringObject(IScatteringObject? scattering)
         {
             Value = scattering;
         }
 
-        public override IGeometry[] Geometries
+        public override IGeometry[]? Geometries
         {
             get
             {
-                Mesh3D mesh3D = Value?.Mesh3D;
+                Mesh3D? mesh3D = Value?.Mesh3D;
 
                 return mesh3D == null ? null : [mesh3D];
             }
@@ -38,7 +38,7 @@ namespace DiGi.Communication.Rhino.Classes
 
     public class GooScatteringObjectParam : GooBakeAwareSerializableParam<GooScatteringObject, IScatteringObject>
     {
-        public override Guid ComponentGuid => new Guid("dcaba3c2-38c2-4520-817d-a6f157277457");
+        public override Guid ComponentGuid => new ("dcaba3c2-38c2-4520-817d-a6f157277457");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

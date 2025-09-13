@@ -13,7 +13,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("25da38ff-35dd-418d-8d0e-b961ed9995e2");
+        public override Guid ComponentGuid => new ("25da38ff-35dd-418d-8d0e-b961ed9995e2");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -39,18 +39,20 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometricalPropagationModelParam() { Name = "GeometricalPropagationModel", NickName = "GeometricalPropagationModel", Description = "GeometricalPropagationModel", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new GooGeometricalPropagationModelParam() { Name = "GeometricalPropagationModel", NickName = "GeometricalPropagationModel", Description = "GeometricalPropagationModel", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
 
-                Param_Integer param_Integer = new Param_Integer() { Name = "RayCount", NickName = "RayCount", Description = "Ray count", Access = GH_ParamAccess.item, Optional = true };
+                Param_Integer param_Integer = new() { Name = "RayCount", NickName = "RayCount", Description = "Ray count", Access = GH_ParamAccess.item, Optional = true };
                 param_Integer.SetPersistentData(1);
                 result.Add(new Param(param_Integer, ParameterVisibility.Voluntary));
 
-                Param_Number param_Number = new Param_Number() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
-                param_Integer.SetPersistentData(Core.Constans.Tolerance.Distance);
-                result.Add(new Param(param_Integer, ParameterVisibility.Voluntary));
+                Param_Number param_Number = new() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
+                param_Number.SetPersistentData(Core.Constans.Tolerance.Distance);
+                result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -61,11 +63,13 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometricalPropagationModelParam() { Name = "GeometricalPropagationModel", NickName = "GeometricalPropagationModel", Description = "DiGi Communication GeometricalPropagationModel", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooAngularPowerDistributionProfileParam() { Name = "AngularPowerDistributionProfiles", NickName = "AngularPowerDistributionProfiles", Description = "DiGi Communication AngularPowerDistributionProfiles", Access = GH_ParamAccess.list }, ParameterVisibility.Voluntary));
-                result.Add(new Param(new Param_Boolean() { Name = "Succeeded", NickName = "Succeeded", Description = "Succeeded", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooGeometricalPropagationModelParam() { Name = "GeometricalPropagationModel", NickName = "GeometricalPropagationModel", Description = "DiGi Communication GeometricalPropagationModel", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooAngularPowerDistributionProfileParam() { Name = "AngularPowerDistributionProfiles", NickName = "AngularPowerDistributionProfiles", Description = "DiGi Communication AngularPowerDistributionProfiles", Access = GH_ParamAccess.list }, ParameterVisibility.Voluntary),
+                    new Param(new Param_Boolean() { Name = "Succeeded", NickName = "Succeeded", Description = "Succeeded", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -86,7 +90,7 @@ namespace DiGi.Communication.Rhino.Classes
             int index;
 
             index = Params.IndexOfInputParam("GeometricalPropagationModel");
-            Communication.Classes.GeometricalPropagationModel geometricalPropagationModel = null;
+            Communication.Classes.GeometricalPropagationModel? geometricalPropagationModel = null;
             if (index == -1 || !dataAccess.GetData(index, ref geometricalPropagationModel) || geometricalPropagationModel == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -109,13 +113,13 @@ namespace DiGi.Communication.Rhino.Classes
 
             geometricalPropagationModel = new Communication.Classes.GeometricalPropagationModel(geometricalPropagationModel);
 
-            Communication.Classes.AngularPowerDistributionCalculatorOptions angularPowerDistributionCalculatorOptions = new Communication.Classes.AngularPowerDistributionCalculatorOptions()
+            Communication.Classes.AngularPowerDistributionCalculatorOptions angularPowerDistributionCalculatorOptions = new()
             {
                 RayCount = rayCount,
                 Tolerance = tolerance,
             };
 
-            Communication.Classes.AngularPowerDistributionCalculator angularPowerDistributionCalculator = new Communication.Classes.AngularPowerDistributionCalculator()
+            Communication.Classes.AngularPowerDistributionCalculator angularPowerDistributionCalculator = new()
             {
                 GeometricalPropagationModel = geometricalPropagationModel,
                 AngularPowerDistributionCalculatorOptions = angularPowerDistributionCalculatorOptions

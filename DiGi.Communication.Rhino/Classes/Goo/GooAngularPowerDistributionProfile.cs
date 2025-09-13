@@ -16,27 +16,27 @@ namespace DiGi.Communication.Rhino.Classes
         {
         }
 
-        public GooAngularPowerDistributionProfile(IAngularPowerDistributionProfile angularPowerDistributionProfile)
+        public GooAngularPowerDistributionProfile(IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {
             Value = angularPowerDistributionProfile;
         }
 
-        public override IGeometry[] Geometries
+        public override IGeometry[]? Geometries
         {
             get
             {
-                IEnumerable<AngularPowerDistribution> angularPowerDistributions = Value?.AngularPowerDistributions;
+                IEnumerable<AngularPowerDistribution>? angularPowerDistributions = Value?.AngularPowerDistributions;
                 if(angularPowerDistributions == null)
                 {
                     return null;
                 }
 
-                Point3D location = Value.Location;
+                Point3D? location = Value?.Location;
 
-                List<IGeometry> geometries = new List<IGeometry>();
+                List<IGeometry> geometries = [];
                 foreach(AngularPowerDistribution angularPowerDistribution in angularPowerDistributions)
                 {
-                    List<Vector3D> vector3Ds = angularPowerDistribution.Vectors;
+                    List<Vector3D>? vector3Ds = angularPowerDistribution.Vectors;
                     if(vector3Ds == null)
                     {
                         continue;
@@ -44,11 +44,11 @@ namespace DiGi.Communication.Rhino.Classes
 
                     foreach(Vector3D vector3D in vector3Ds)
                     {
-                        geometries.Add(new Segment3D(location.GetMoved(vector3D.GetInversed()), location));
+                        geometries.Add(new Segment3D(location?.GetMoved(vector3D.GetInversed()), location));
                     }
                 }
 
-                return geometries.ToArray();
+                return [.. geometries];
             }
         }
 
@@ -61,7 +61,7 @@ namespace DiGi.Communication.Rhino.Classes
 
     public class GooAngularPowerDistributionProfileParam : GooBakeAwareSerializableParam<GooAngularPowerDistributionProfile, IAngularPowerDistributionProfile>
     {
-        public override Guid ComponentGuid => new Guid("493c2a67-0e30-47bd-bb35-df3defbc9f0d");
+        public override Guid ComponentGuid => new ("493c2a67-0e30-47bd-bb35-df3defbc9f0d");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

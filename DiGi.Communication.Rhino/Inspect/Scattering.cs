@@ -10,7 +10,7 @@ namespace DiGi.Communication.Rhino
     {
 
         [Inspect("ScatteringPointGroups", "ScatteringPointGroups", "ScatteringPointGroups")]
-        public static IEnumerable ScatteringPointGroups(this Communication.Classes.Scattering scattering)
+        public static IEnumerable? ScatteringPointGroups(this Communication.Classes.Scattering? scattering)
         {
             if (scattering == null)
             {
@@ -21,7 +21,7 @@ namespace DiGi.Communication.Rhino
         }
 
         [Inspect("Delay", "Delay", "Delay [μm]")]
-        public static GH_Number Delay(this Communication.Classes.Scattering scattering)
+        public static GH_Number? Delay(this Communication.Classes.Scattering? scattering)
         {
             if (scattering == null)
             {

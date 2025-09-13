@@ -8,7 +8,7 @@ namespace DiGi.Communication.Rhino
     public static partial class Inspect
     {
         [Inspect("Reference", "Reference", "Reference")]
-        public static GH_String Reference(this Interfaces.IScatteringObject scatteringObject)
+        public static GH_String? Reference(this Interfaces.IScatteringObject? scatteringObject)
         {
             if (scatteringObject == null)
             {
@@ -19,7 +19,7 @@ namespace DiGi.Communication.Rhino
         }
 
         [Inspect("Mesh3D", "Mesh3D", "Mesh3D")]
-        public static GooMesh3D Mesh3D(this Interfaces.IScatteringObject scatteringObject)
+        public static GooMesh3D? Mesh3D(this Interfaces.IScatteringObject? scatteringObject)
         {
             if (scatteringObject == null)
             {
@@ -30,7 +30,7 @@ namespace DiGi.Communication.Rhino
         }
 
         [Inspect("ScatteringCoefficient", "ScatteringCoefficient", "Scattering coefficient")]
-        public static GH_Number ScatteringCoefficient(this Interfaces.IScatteringObject scatteringObject)
+        public static GH_Number? ScatteringCoefficient(this Interfaces.IScatteringObject? scatteringObject)
         {
             if (scatteringObject == null)
             {

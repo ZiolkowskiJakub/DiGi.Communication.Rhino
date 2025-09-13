@@ -10,7 +10,7 @@ namespace DiGi.Communication.Rhino
     public static partial class Inspect
     {
         [Inspect("Reference", "Reference", "Reference")]
-        public static GH_String Reference(this ScatteringPointGroup scatteringPointGroup)
+        public static GH_String? Reference(this ScatteringPointGroup? scatteringPointGroup)
         {
             if (scatteringPointGroup == null)
             {
@@ -21,7 +21,7 @@ namespace DiGi.Communication.Rhino
         }
 
         [Inspect("Points", "Points", "Points")]
-        public static IEnumerable ScatteringPoints(this ScatteringPointGroup scatteringPointGroup)
+        public static IEnumerable? ScatteringPoints(this ScatteringPointGroup? scatteringPointGroup)
         {
             if (scatteringPointGroup == null)
             {

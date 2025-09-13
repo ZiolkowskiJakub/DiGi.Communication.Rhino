@@ -14,7 +14,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("2e7e8de0-9110-49ae-bfd4-625b4489ab65");
+        public override Guid ComponentGuid => new ("2e7e8de0-9110-49ae-bfd4-625b4489ab65");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -40,10 +40,12 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooAntennaParam() { Name = "Antenna_1", NickName = "Antenna_1", Description = "First antenna", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooAntennaParam() { Name = "Antenna_2", NickName = "Antenna_2", Description = "Second antenna", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Param_Number() { Name = "Delay", NickName = "Delay", Description = "Delay [μm]", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new GooAntennaParam() { Name = "Antenna_1", NickName = "Antenna_1", Description = "First antenna", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooAntennaParam() { Name = "Antenna_2", NickName = "Antenna_2", Description = "Second antenna", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Param_Number() { Name = "Delay", NickName = "Delay", Description = "Delay [μm]", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
 
                 Param_Number param_Number;
 
@@ -51,7 +53,7 @@ namespace DiGi.Communication.Rhino.Classes
                 param_Number.SetPersistentData(Core.Constans.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -62,9 +64,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooEllipsoidParam() { Name = "Ellipsoid", NickName = "Ellipsoid", Description = "DiGi Ellipsoid", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooEllipsoidParam() { Name = "Ellipsoid", NickName = "Ellipsoid", Description = "DiGi Ellipsoid", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -79,7 +83,7 @@ namespace DiGi.Communication.Rhino.Classes
             int index;
 
             index = Params.IndexOfInputParam("Antenna_1");
-            IAntenna antenna_1 = null;
+            IAntenna? antenna_1 = null;
             if (index == -1 || !dataAccess.GetData(index, ref antenna_1) || antenna_1 == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -87,7 +91,7 @@ namespace DiGi.Communication.Rhino.Classes
             }
 
             index = Params.IndexOfInputParam("Antenna_2");
-            IAntenna antenna_2 = null;
+            IAntenna? antenna_2 = null;
             if (index == -1 || !dataAccess.GetData(index, ref antenna_2) || antenna_2 == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -111,7 +115,7 @@ namespace DiGi.Communication.Rhino.Classes
                 dataAccess.GetData(index, ref tolerance);
             }
 
-            Geometry.Spatial.Classes.Ellipsoid ellipsoid = Create.Ellipsoid(antenna_1, antenna_2, delay, tolerance);
+            Geometry.Spatial.Classes.Ellipsoid? ellipsoid = Create.Ellipsoid(antenna_1, antenna_2, delay, tolerance);
 
             index = Params.IndexOfOutputParam("Ellipsoid");
             if (index != -1)

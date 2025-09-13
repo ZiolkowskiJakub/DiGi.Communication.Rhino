@@ -15,7 +15,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("a8479a5e-031d-4d17-9a5d-6d433c82b756");
+        public override Guid ComponentGuid => new ("a8479a5e-031d-4d17-9a5d-6d433c82b756");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -41,13 +41,14 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooScatteringProfileParam() { Name = "ScatteringProfile", NickName = "ScatteringProfile", Description = "DiGi Communication ScatteringProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Param_Number() { Name = "Delay", NickName = "Delay", Description = "Delay [μm]", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new GooScatteringProfileParam() { Name = "ScatteringProfile", NickName = "ScatteringProfile", Description = "DiGi Communication ScatteringProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Param_Number() { Name = "Delay", NickName = "Delay", Description = "Delay [μm]", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Param_String() { Name = "References", NickName = "References", Description = "References", Access = GH_ParamAccess.list, Optional = true }, ParameterVisibility.Voluntary),
+                ];
 
-                result.Add(new Param(new Param_String() { Name = "References", NickName = "References", Description = "References", Access = GH_ParamAccess.list, Optional = true }, ParameterVisibility.Voluntary));
-
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -58,9 +59,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooPolyline3DParam() { Name = "Polyline3Ds", NickName = "Polyline3Ds", Description = "DiGi Geometry Polyline3Ds", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooPolyline3DParam() { Name = "Polyline3Ds", NickName = "Polyline3Ds", Description = "DiGi Geometry Polyline3Ds", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -75,7 +78,7 @@ namespace DiGi.Communication.Rhino.Classes
             int index;
 
             index = Params.IndexOfInputParam("ScatteringProfile");
-            IScatteringProfile scatteringProfile = null;
+            IScatteringProfile? scatteringProfile = null;
             if (index == -1 || !dataAccess.GetData(index, ref scatteringProfile) || scatteringProfile == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -93,13 +96,13 @@ namespace DiGi.Communication.Rhino.Classes
             delay = Core.Query.Round(delay * 1e-6, 1e-12);
 
 
-            List<string> references = new List<string>();
+            List<string>? references = [];
             index = Params.IndexOfInputParam("References");
             if(index != -1)
             {
                 if(!dataAccess.GetDataList(index, references))
                 {
-                    references = new List<string>();
+                    references = [];
                 }
             }
 
@@ -108,7 +111,7 @@ namespace DiGi.Communication.Rhino.Classes
                 references = null;
             }
 
-            List<Polyline3D> polyline3Ds = Query.Polyline3Ds(scatteringProfile, delay, references);
+            List<Polyline3D>? polyline3Ds = Query.Polyline3Ds(scatteringProfile, delay, references);
 
             index = Params.IndexOfOutputParam("Polyline3Ds");
             if (index != -1)

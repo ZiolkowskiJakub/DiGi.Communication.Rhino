@@ -16,28 +16,35 @@ namespace DiGi.Communication.Rhino.Classes
         {
         }
 
-        public GooScatteringProfile(IScatteringProfile scatteringProfile)
+        public GooScatteringProfile(IScatteringProfile? scatteringProfile)
         {
             Value = scatteringProfile;
         }
 
-        public override IGeometry[] Geometries
+        public override IGeometry[]? Geometries
         {
             get
             {
-                IEnumerable<Scattering> scatterings = Value?.Scatterings;
+                IEnumerable<Scattering>? scatterings = Value?.Scatterings;
                 if(scatterings == null)
                 {
                     return null;
                 }
 
-                Point3D location_1 = Value.Location_1;
-                Point3D location_2 = Value.Location_2;
+                if(Value?.Location_1 is not Point3D location_1)
+                {
+                    return null;
+                }
 
-                List<IGeometry> geometries = new List<IGeometry>();
+                if (Value?.Location_2 is not Point3D location_2)
+                {
+                    return null;
+                }
+
+                List<IGeometry> geometries = [];
                 foreach(Scattering scattering in scatterings)
                 {
-                    List<ScatteringPointGroup> scatteringPointGroups = scattering.ScatteringPointGroups;
+                    List<ScatteringPointGroup>? scatteringPointGroups = scattering.ScatteringPointGroups;
                     if(scatteringPointGroups == null)
                     {
                         continue;
@@ -45,7 +52,7 @@ namespace DiGi.Communication.Rhino.Classes
 
                     foreach(ScatteringPointGroup scatteringPointGroup in scatteringPointGroups)
                     {
-                        List<Point3D> point3Ds = scatteringPointGroup?.Points;
+                        List<Point3D>? point3Ds = scatteringPointGroup?.Points;
                         if(point3Ds == null)
                         {
                             continue;
@@ -58,7 +65,7 @@ namespace DiGi.Communication.Rhino.Classes
                     }
                 }
 
-                return geometries.ToArray();
+                return [.. geometries];
             }
         }
 
@@ -66,12 +73,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             return new GooScatteringProfile(Value);
         }
-
     }
 
     public class GooScatteringProfileParam : GooBakeAwareSerializableParam<GooScatteringProfile, IScatteringProfile>
     {
-        public override Guid ComponentGuid => new Guid("6568b5cb-7b25-4ff7-ad94-613e3562db78");
+        public override Guid ComponentGuid => new ("6568b5cb-7b25-4ff7-ad94-613e3562db78");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

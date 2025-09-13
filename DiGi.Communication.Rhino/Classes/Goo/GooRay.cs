@@ -14,22 +14,22 @@ namespace DiGi.Communication.Rhino.Classes
         {
         }
 
-        public GooRay(Ray ray)
+        public GooRay(Ray? ray)
         {
             Value = ray;
         }
 
-        public override IGeometry[] Geometries
+        public override IGeometry[]? Geometries
         {
             get
             {
-                Point3D point3D = Value?.Point;
+                Point3D? point3D = Value?.Point;
                 if (point3D == null)
                 {
                     return null;
                 }
 
-                Vector3D vector3D = Value.Vector;
+                Vector3D? vector3D = Value?.Vector;
                 if (vector3D == null)
                 {
                     return null;
@@ -48,7 +48,7 @@ namespace DiGi.Communication.Rhino.Classes
 
     public class GooRayParam : GooBakeAwareSerializableParam<GooRay, Ray>
     {
-        public override Guid ComponentGuid => new Guid("5d3b6300-2aac-4ea5-9d6e-f009857c568a");
+        public override Guid ComponentGuid => new ("5d3b6300-2aac-4ea5-9d6e-f009857c568a");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

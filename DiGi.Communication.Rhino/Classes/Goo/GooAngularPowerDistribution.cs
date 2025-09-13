@@ -12,7 +12,7 @@ namespace DiGi.Communication.Rhino.Classes
         {
         }
 
-        public GooAngularPowerDistribution(IAngularPowerDistribution angularPowerDistribution)
+        public GooAngularPowerDistribution(IAngularPowerDistribution? angularPowerDistribution)
         {
             Value = angularPowerDistribution;
         }
@@ -25,7 +25,7 @@ namespace DiGi.Communication.Rhino.Classes
 
     public class GooAngularPowerDistributionParam : GooPresistentParam<GooAngularPowerDistribution, IAngularPowerDistribution>
     {
-        public override Guid ComponentGuid => new Guid("41062566-bf3b-4719-a019-31ea2d641cd1");
+        public override Guid ComponentGuid => new ("41062566-bf3b-4719-a019-31ea2d641cd1");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

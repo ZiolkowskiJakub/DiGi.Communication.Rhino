@@ -15,7 +15,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("77978b5a-9aa0-43e8-af02-9f44a42f052e");
+        public override Guid ComponentGuid => new ("77978b5a-9aa0-43e8-af02-9f44a42f052e");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -41,13 +41,14 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooAngularPowerDistributionProfileParam() { Name = "AngularPowerDistributionProfile", NickName = "AngularPowerDistributionProfile", Description = "AngularPowerDistributionProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Param_Number() { Name = "Delay", NickName = "Delay", Description = "Delay [μm]", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new GooAngularPowerDistributionProfileParam() { Name = "AngularPowerDistributionProfile", NickName = "AngularPowerDistributionProfile", Description = "AngularPowerDistributionProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Param_Number() { Name = "Delay", NickName = "Delay", Description = "Delay [μm]", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Param_Number() { Name = "Factor", NickName = "Factor", Description = "Factor", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                ];
 
-                result.Add(new Param(new Param_Number() { Name = "Factor", NickName = "Factor", Description = "Factor", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
-
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -58,9 +59,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooRayParam() { Name = "Rays", NickName = "Rays", Description = "DiGi Rays", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooRayParam() { Name = "Rays", NickName = "Rays", Description = "DiGi Rays", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -75,7 +78,7 @@ namespace DiGi.Communication.Rhino.Classes
             int index;
 
             index = Params.IndexOfInputParam("AngularPowerDistributionProfile");
-            IAngularPowerDistributionProfile angularPowerDistributionProfile = null;
+            IAngularPowerDistributionProfile? angularPowerDistributionProfile = null;
             if (index == -1 || !dataAccess.GetData(index, ref angularPowerDistributionProfile) || angularPowerDistributionProfile == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -102,7 +105,7 @@ namespace DiGi.Communication.Rhino.Classes
 
             delay = Core.Query.Round(delay * 1e-6, 1e-12);
 
-            List<Ray> rays = Query.Scale(angularPowerDistributionProfile.GetRays(delay), factor);
+            List<Ray>? rays = Query.Scale(angularPowerDistributionProfile.GetRays(delay), factor);
 
             index = Params.IndexOfOutputParam("Rays");
             if (index != -1)

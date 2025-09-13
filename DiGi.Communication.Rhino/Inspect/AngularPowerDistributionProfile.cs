@@ -14,7 +14,7 @@ namespace DiGi.Communication.Rhino
     {
 
         [Inspect("AngularPowerDistributions", "AngularPowerDistributions", "AngularPowerDistributions")]
-        public static IEnumerable AngularPowerDistributions(this Interfaces.IAngularPowerDistributionProfile angularPowerDistributionProfile)
+        public static IEnumerable? AngularPowerDistributions(this Interfaces.IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {
             if (angularPowerDistributionProfile == null)
             {
@@ -25,20 +25,20 @@ namespace DiGi.Communication.Rhino
         }
 
         [Inspect("Delays", "Delays", "Delays [μm]")]
-        public static IEnumerable Delays(this Interfaces.IAngularPowerDistributionProfile angularPowerDistributionProfile)
+        public static IEnumerable? Delays(this Interfaces.IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {
             if (angularPowerDistributionProfile == null)
             {
                 return null;
             }
 
-            IEnumerable<AngularPowerDistribution> angularPowerDistributions = angularPowerDistributionProfile.AngularPowerDistributions;
+            IEnumerable<AngularPowerDistribution>? angularPowerDistributions = angularPowerDistributionProfile.AngularPowerDistributions;
             if (angularPowerDistributions == null)
             {
                 return null;
             }
 
-            List<GH_Number> result = new List<GH_Number>();
+            List<GH_Number> result = [];
             foreach (AngularPowerDistribution angularPowerDistribution in angularPowerDistributions)
             {
                 result.Add(new GH_Number(angularPowerDistribution.Delay * 1e6));
@@ -48,7 +48,7 @@ namespace DiGi.Communication.Rhino
         }
 
         [Inspect("Location", "Location", "Location")]
-        public static GooPoint3D Location(this Interfaces.IAngularPowerDistributionProfile angularPowerDistributionProfile)
+        public static GooPoint3D? Location(this Interfaces.IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {
             if (angularPowerDistributionProfile == null)
             {
@@ -59,29 +59,29 @@ namespace DiGi.Communication.Rhino
         }
         
         [Inspect("Rays", "Rays", "Rays")]
-        public static IEnumerable Rays(this Interfaces.IAngularPowerDistributionProfile angularPowerDistributionProfile)
+        public static IEnumerable? Rays(this Interfaces.IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {
             if (angularPowerDistributionProfile == null)
             {
                 return null;
             }
 
-            Geometry.Spatial.Classes.Point3D location = angularPowerDistributionProfile.Location;
+            Geometry.Spatial.Classes.Point3D? location = angularPowerDistributionProfile.Location;
             if(location == null)
             {
                 return null;
             }
 
-            IEnumerable<AngularPowerDistribution> angularPowerDistributions = angularPowerDistributionProfile.AngularPowerDistributions;
+            IEnumerable<AngularPowerDistribution>? angularPowerDistributions = angularPowerDistributionProfile.AngularPowerDistributions;
             if(angularPowerDistributions == null)
             {
                 return null;
             }
 
-            List<Geometry.Spatial.Classes.Vector3D> vector3Ds = new List<Geometry.Spatial.Classes.Vector3D>();
+            List<Geometry.Spatial.Classes.Vector3D> vector3Ds = [];
             foreach (AngularPowerDistribution angularPowerDistribution in angularPowerDistributions)
             {
-                List< Geometry.Spatial.Classes.Vector3D> vector3Ds_Temp = angularPowerDistribution?.Vectors;
+                List< Geometry.Spatial.Classes.Vector3D>? vector3Ds_Temp = angularPowerDistribution?.Vectors;
                 if(vector3Ds_Temp == null)
                 {
                     continue;

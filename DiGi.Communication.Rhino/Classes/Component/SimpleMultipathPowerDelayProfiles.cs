@@ -12,7 +12,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("e970f03b-2557-4407-8551-601ae19ab301");
+        public override Guid ComponentGuid => new ("e970f03b-2557-4407-8551-601ae19ab301");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -38,10 +38,12 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooEnumParam() { Name = "DefaultSimpleMultipathPowerDelayProfile", NickName = "DefaultSimpleMultipathPowerDelayProfile", Description = "DefaultSimpleMultipathPowerDelayProfile Enum", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new GooEnumParam() { Name = "DefaultSimpleMultipathPowerDelayProfile", NickName = "DefaultSimpleMultipathPowerDelayProfile", Description = "DefaultSimpleMultipathPowerDelayProfile Enum", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -52,9 +54,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooSimpleMultipathPowerDelayProfileParam() { Name = "SimpleMultipathPowerDelayProfile", NickName = "SimpleMultipathPowerDelayProfile", Description = "DiGi Communication SimpleMultipathPowerDelayProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooSimpleMultipathPowerDelayProfileParam() { Name = "SimpleMultipathPowerDelayProfile", NickName = "SimpleMultipathPowerDelayProfile", Description = "DiGi Communication SimpleMultipathPowerDelayProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -76,7 +80,7 @@ namespace DiGi.Communication.Rhino.Classes
                 return;
             }
 
-            Communication.Classes.SimpleMultipathPowerDelayProfile simpleMultipathPowerDelayProfile = Create.SimpleMultipathPowerDelayProfile(defaultSimpleMultipathPowerDelayProfile);
+            Communication.Classes.SimpleMultipathPowerDelayProfile? simpleMultipathPowerDelayProfile = Create.SimpleMultipathPowerDelayProfile(defaultSimpleMultipathPowerDelayProfile);
 
             index = Params.IndexOfOutputParam("SimpleMultipathPowerDelayProfile");
             if (index != -1)

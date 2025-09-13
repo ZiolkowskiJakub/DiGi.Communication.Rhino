@@ -13,7 +13,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("f73be78e-d0a6-411b-a855-804f4a86fd97");
+        public override Guid ComponentGuid => new ("f73be78e-d0a6-411b-a855-804f4a86fd97");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -39,11 +39,13 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooSimpleMultipathPowerDelayProfileParam() { Name = "SimpleMultipathPowerDelayProfile_Visible", NickName = "SimpleMultipathPowerDelayProfile_Visible", Description = "SimpleMultipathPowerDelayProfile for case when antennas are visible", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooSimpleMultipathPowerDelayProfileParam() { Name = "SimpleMultipathPowerDelayProfile_Hidden", NickName = "SimpleMultipathPowerDelayProfile_Hidden", Description = "SimpleMultipathPowerDelayProfile for case when antennas are hidden", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new GooSimpleMultipathPowerDelayProfileParam() { Name = "SimpleMultipathPowerDelayProfile_Visible", NickName = "SimpleMultipathPowerDelayProfile_Visible", Description = "SimpleMultipathPowerDelayProfile for case when antennas are visible", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooSimpleMultipathPowerDelayProfileParam() { Name = "SimpleMultipathPowerDelayProfile_Hidden", NickName = "SimpleMultipathPowerDelayProfile_Hidden", Description = "SimpleMultipathPowerDelayProfile for case when antennas are hidden", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -54,9 +56,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooComplexMultipathPowerDelayProfileParam() { Name = "ComplexMultipathPowerDelayProfile", NickName = "ComplexMultipathPowerDelayProfile", Description = "DiGi Communication ComplexMultipathPowerDelayProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooComplexMultipathPowerDelayProfileParam() { Name = "ComplexMultipathPowerDelayProfile", NickName = "ComplexMultipathPowerDelayProfile", Description = "DiGi Communication ComplexMultipathPowerDelayProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -71,7 +75,7 @@ namespace DiGi.Communication.Rhino.Classes
             int index;
 
             index = Params.IndexOfInputParam("SimpleMultipathPowerDelayProfile_Visible");
-            Communication.Classes.SimpleMultipathPowerDelayProfile simpleMultipathPowerDelayProfile_Visible = null;
+            Communication.Classes.SimpleMultipathPowerDelayProfile? simpleMultipathPowerDelayProfile_Visible = null;
             if (index == -1 || !dataAccess.GetData(index, ref simpleMultipathPowerDelayProfile_Visible) || simpleMultipathPowerDelayProfile_Visible == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -79,14 +83,14 @@ namespace DiGi.Communication.Rhino.Classes
             }
 
             index = Params.IndexOfInputParam("SimpleMultipathPowerDelayProfile_Hidden");
-            Communication.Classes.SimpleMultipathPowerDelayProfile simpleMultipathPowerDelayProfile_Hidden = null;
+            Communication.Classes.SimpleMultipathPowerDelayProfile? simpleMultipathPowerDelayProfile_Hidden = null;
             if (index == -1 || !dataAccess.GetData(index, ref simpleMultipathPowerDelayProfile_Hidden) || simpleMultipathPowerDelayProfile_Hidden == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            Communication.Classes.ComplexMultipathPowerDelayProfile complexMultipathPowerDelayProfile = new Communication.Classes.ComplexMultipathPowerDelayProfile(simpleMultipathPowerDelayProfile_Visible, simpleMultipathPowerDelayProfile_Hidden);
+            Communication.Classes.ComplexMultipathPowerDelayProfile complexMultipathPowerDelayProfile = new(simpleMultipathPowerDelayProfile_Visible, simpleMultipathPowerDelayProfile_Hidden);
 
             index = Params.IndexOfOutputParam("ComplexMultipathPowerDelayProfile");
             if (index != -1)

@@ -12,7 +12,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("28e14ad3-3a74-4f27-a19e-348ddc68a002");
+        public override Guid ComponentGuid => new ("28e14ad3-3a74-4f27-a19e-348ddc68a002");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -38,11 +38,13 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooPoint3DParam() { Name = "Location", NickName = "Location", Description = "Location", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooEnumParam() { Name = "Functions", NickName = "Functions", Description = "Functions", Access = GH_ParamAccess.list, Optional = true }, ParameterVisibility.Voluntary));
+                List<Param> result =
+                [
+                    new Param(new GooPoint3DParam() { Name = "Location", NickName = "Location", Description = "Location", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooEnumParam() { Name = "Functions", NickName = "Functions", Description = "Functions", Access = GH_ParamAccess.list, Optional = true }, ParameterVisibility.Voluntary),
+                ];
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -53,9 +55,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooAntennaParam() { Name = "Antenna", NickName = "Antenna", Description = "DiGi Communication Antenna", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooAntennaParam() { Name = "Antenna", NickName = "Antenna", Description = "DiGi Communication Antenna", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -70,7 +74,7 @@ namespace DiGi.Communication.Rhino.Classes
             int index;
 
             index = Params.IndexOfInputParam("Location");
-            Geometry.Spatial.Classes.Point3D location = null;
+            Geometry.Spatial.Classes.Point3D? location = null;
             if (index == -1 || !dataAccess.GetData(index, ref location) || location == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -78,7 +82,7 @@ namespace DiGi.Communication.Rhino.Classes
             }
 
             index = Params.IndexOfInputParam("Functions");
-            List<Enums.Function> functions = new List<Enums.Function>();
+            List<Enums.Function> functions = [];
             if (index != -1)
             {
                 dataAccess.GetDataList(index, functions);
@@ -89,7 +93,7 @@ namespace DiGi.Communication.Rhino.Classes
                 functions = [Enums.Function.Transmitter, Enums.Function.Receiver];
             }
 
-            Communication.Classes.Antenna antenna = new Communication.Classes.Antenna(location, functions.ToArray());
+            Communication.Classes.Antenna? antenna = new(location, [.. functions]);
 
             index = Params.IndexOfOutputParam("Antenna");
             if (index != -1)

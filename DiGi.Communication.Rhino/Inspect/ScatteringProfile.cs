@@ -13,46 +13,46 @@ namespace DiGi.Communication.Rhino
     {
 
         [Inspect("Location_1", "Location_1", "First location")]
-        public static GooPoint3D Location_1(this Interfaces.IScatteringProfile scatteringProfile)
+        public static GooPoint3D? Location_1(this Interfaces.IScatteringProfile? scatteringProfile)
         {
             if (scatteringProfile == null)
             {
                 return null;
             }
 
-            Geometry.Spatial.Classes.Point3D location = scatteringProfile.Location_1;
+            Geometry.Spatial.Classes.Point3D? location = scatteringProfile.Location_1;
         
             return location == null ? null : new GooPoint3D(location);
         }
 
         [Inspect("Location_2", "Location_2", "Second location")]
-        public static GooPoint3D Location_2(this Interfaces.IScatteringProfile scatteringProfile)
+        public static GooPoint3D? Location_2(this Interfaces.IScatteringProfile? scatteringProfile)
         {
             if (scatteringProfile == null)
             {
                 return null;
             }
 
-            Geometry.Spatial.Classes.Point3D location = scatteringProfile.Location_2;
+            Geometry.Spatial.Classes.Point3D? location = scatteringProfile.Location_2;
 
             return location == null ? null : new GooPoint3D(location);
         }
 
         [Inspect("Scatterings", "Scatterings", "Scatterings")]
-        public static IEnumerable Scatterings(this Interfaces.IScatteringProfile scatteringProfile)
+        public static IEnumerable? Scatterings(this Interfaces.IScatteringProfile? scatteringProfile)
         {
             if (scatteringProfile == null)
             {
                 return null;
             }
 
-            IEnumerable<Scattering> scatterings = scatteringProfile.Scatterings;
+            IEnumerable<Scattering>? scatterings = scatteringProfile.Scatterings;
             if(scatterings == null)
             {
                 return null;
             }
 
-            List<GooScattering> result = new List<GooScattering>();
+            List<GooScattering> result = [];
             foreach(Scattering scattering in scatterings)
             {
                 result.Add(new GooScattering(scattering));
@@ -62,32 +62,32 @@ namespace DiGi.Communication.Rhino
         }
 
         [Inspect("Ellipsoids", "Ellipsoids", "Ellipsoids")]
-        public static IEnumerable Ellipsoids(this Interfaces.IScatteringProfile scatteringProfile)
+        public static IEnumerable? Ellipsoids(this Interfaces.IScatteringProfile? scatteringProfile)
         {
             if (scatteringProfile == null)
             {
                 return null;
             }
 
-            Geometry.Spatial.Classes.Point3D location_1 = scatteringProfile.Location_1;
+            Geometry.Spatial.Classes.Point3D? location_1 = scatteringProfile.Location_1;
             if (location_1 == null)
             {
                 return null;
             }
 
-            Geometry.Spatial.Classes.Point3D location_2 = scatteringProfile.Location_2;
+            Geometry.Spatial.Classes.Point3D? location_2 = scatteringProfile.Location_2;
             if (location_2 == null)
             {
                 return null;
             }
 
-            IEnumerable<Scattering> scatterings = scatteringProfile.Scatterings;
+            IEnumerable<Scattering>? scatterings = scatteringProfile.Scatterings;
             if (scatterings == null)
             {
                 return null;
             }
 
-            List<GooEllipsoid> result = new List<GooEllipsoid>();
+            List<GooEllipsoid> result = [];
             foreach (Scattering scattering in scatterings)
             {
                 result.Add(new GooEllipsoid(Create.Ellipsoid(location_1, location_2, scattering.Delay)));
@@ -97,7 +97,7 @@ namespace DiGi.Communication.Rhino
         }
 
         [Inspect("Visible", "Visible", "Visible")]
-        public static GH_Boolean Visible(this Interfaces.IScatteringProfile scatteringProfile)
+        public static GH_Boolean? Visible(this Interfaces.IScatteringProfile? scatteringProfile)
         {
             if (scatteringProfile == null)
             {

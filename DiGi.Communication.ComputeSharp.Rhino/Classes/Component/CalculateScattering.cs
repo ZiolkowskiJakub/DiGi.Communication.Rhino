@@ -16,7 +16,7 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("f22be95a-de19-4379-a31f-966b65ea9884");
+        public override Guid ComponentGuid => new ("f22be95a-de19-4379-a31f-966b65ea9884");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -42,8 +42,10 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometricalPropagationModelParam() { Name = "GeometricalPropagationModel", NickName = "GeometricalPropagationModel", Description = "GeometricalPropagationModel", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new GooGeometricalPropagationModelParam() { Name = "GeometricalPropagationModel", NickName = "GeometricalPropagationModel", Description = "GeometricalPropagationModel", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
 
                 Param_Number param_Number;
 
@@ -59,7 +61,7 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
                 param_Number.SetPersistentData(Core.Constans.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -70,11 +72,13 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometricalPropagationModelParam() { Name = "GeometricalPropagationModel", NickName = "GeometricalPropagationModel", Description = "DiGi Communication GeometricalPropagationModel", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooScatteringProfileParam() { Name = "ScatteringProfiles", NickName = "ScatteringProfiles", Description = "DiGi Communication ScatteringProfiles", Access = GH_ParamAccess.list }, ParameterVisibility.Voluntary));
-                result.Add(new Param(new Param_Boolean() { Name = "Succeeded", NickName = "Succeeded", Description = "Succeeded", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooGeometricalPropagationModelParam() { Name = "GeometricalPropagationModel", NickName = "GeometricalPropagationModel", Description = "DiGi Communication GeometricalPropagationModel", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooScatteringProfileParam() { Name = "ScatteringProfiles", NickName = "ScatteringProfiles", Description = "DiGi Communication ScatteringProfiles", Access = GH_ParamAccess.list }, ParameterVisibility.Voluntary),
+                    new Param(new Param_Boolean() { Name = "Succeeded", NickName = "Succeeded", Description = "Succeeded", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -95,7 +99,7 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
             int index;
 
             index = Params.IndexOfInputParam("GeometricalPropagationModel");
-            Communication.Classes.GeometricalPropagationModel geometricalPropagationModel = null;
+            Communication.Classes.GeometricalPropagationModel? geometricalPropagationModel = null;
             if (index == -1 || !dataAccess.GetData(index, ref geometricalPropagationModel) || geometricalPropagationModel == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -125,14 +129,14 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
 
             geometricalPropagationModel = new Communication.Classes.GeometricalPropagationModel(geometricalPropagationModel);
 
-            ComputeSharp.Classes.ScatteringCalculatorOptions scatteringCalculatorOptions = new ComputeSharp.Classes.ScatteringCalculatorOptions()
+            ComputeSharp.Classes.ScatteringCalculatorOptions scatteringCalculatorOptions = new()
             {
                 PointDensityFactor = pointDensityFactor,
                 AngleFactor = angleFactor,
                 Tolerance = tolerance,
             };
 
-            ComputeSharp.Classes.ScatteringCalculator scatteringCalculator = new ComputeSharp.Classes.ScatteringCalculator()
+            ComputeSharp.Classes.ScatteringCalculator scatteringCalculator = new()
             {
                 GeometricalPropagationModel = geometricalPropagationModel,
                 ScatteringCalculatorOptions = scatteringCalculatorOptions

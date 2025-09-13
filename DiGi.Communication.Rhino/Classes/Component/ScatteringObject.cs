@@ -14,7 +14,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("bc1c20b0-ddf9-4f6e-9c36-0ab1bb0a2753");
+        public override Guid ComponentGuid => new ("bc1c20b0-ddf9-4f6e-9c36-0ab1bb0a2753");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -40,13 +40,14 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooMesh3DParam() { Name = "Mesh3D", NickName = "Mesh3D", Description = "DiGi Geometry Mesh3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Param_String() { Name = "Reference", NickName = "Reference", Description = "Reference", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
+                List<Param> result =
+                [
+                    new Param(new GooMesh3DParam() { Name = "Mesh3D", NickName = "Mesh3D", Description = "DiGi Geometry Mesh3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Param_String() { Name = "Reference", NickName = "Reference", Description = "Reference", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                    new Param(new Param_Number() { Name = "ScatteringCoefficient", NickName = "ScatteringCoefficient", Description = "ScatteringCoefficient", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                ];
 
-                result.Add(new Param(new Param_Number() { Name = "ScatteringCoefficient", NickName = "ScatteringCoefficient", Description = "ScatteringCoefficient", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
-
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -57,9 +58,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooScatteringObjectParam() { Name = "ScatteringObject", NickName = "ScatteringObject", Description = "DiGi Communication Scattering Object", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooScatteringObjectParam() { Name = "ScatteringObject", NickName = "ScatteringObject", Description = "DiGi Communication Scattering Object", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -74,14 +77,14 @@ namespace DiGi.Communication.Rhino.Classes
             int index;
 
             index = Params.IndexOfInputParam("Mesh3D");
-            Mesh3D mesh3D = null;
+            Mesh3D? mesh3D = null;
             if (index == -1 || !dataAccess.GetData(index, ref mesh3D) || mesh3D == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            string reference = null;
+            string? reference = null;
             index = Params.IndexOfInputParam("Reference");
             if (index != -1)
             {
@@ -98,7 +101,7 @@ namespace DiGi.Communication.Rhino.Classes
                 }
             }
 
-            Communication.Classes.ScatteringObject scatteringObject = new Communication.Classes.ScatteringObject(reference, mesh3D, scatteringCoefficient);
+            Communication.Classes.ScatteringObject scatteringObject = new(reference, mesh3D, scatteringCoefficient);
 
             index = Params.IndexOfOutputParam("ScatteringObject");
             if (index != -1)
