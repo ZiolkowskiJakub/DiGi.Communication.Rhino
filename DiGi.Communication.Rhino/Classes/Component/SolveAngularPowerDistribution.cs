@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
-    public class CalculateAngularPowerDistribution : VariableParameterComponent
+    public class SolveAngularPowerDistribution : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
@@ -25,9 +25,9 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public CalculateAngularPowerDistribution()
-          : base("Communication.CalculateAngularPowerDistribution", "Communication.CalculateAngularPowerDistribution",
-              "Calculates angular power distribution",
+        public SolveAngularPowerDistribution()
+          : base("Communication.SolveAngularPowerDistribution", "Communication.SolveAngularPowerDistribution",
+              "Solves angular power distribution",
               "DiGi", "DiGi.Communication")
         {
         }
@@ -113,20 +113,20 @@ namespace DiGi.Communication.Rhino.Classes
 
             geometricalPropagationModel = new Communication.Classes.GeometricalPropagationModel(geometricalPropagationModel);
 
-            Communication.Classes.AngularPowerDistributionCalculatorOptions angularPowerDistributionCalculatorOptions = new()
+            Communication.Classes.AngularPowerDistributionSolverOptions angularPowerDistributionSolverOptions = new()
             {
                 RayCount = rayCount,
                 Tolerance = tolerance,
             };
 
-            Communication.Classes.AngularPowerDistributionCalculator angularPowerDistributionCalculator = new()
+            Communication.Classes.AngularPowerDistributionSolver angularPowerDistributionSolver = new()
             {
                 GeometricalPropagationModel = geometricalPropagationModel,
-                AngularPowerDistributionCalculatorOptions = angularPowerDistributionCalculatorOptions
+                AngularPowerDistributionSolverOptions = angularPowerDistributionSolverOptions
 
             };
 
-            bool succedded = angularPowerDistributionCalculator.Calculate();
+            bool succedded = angularPowerDistributionSolver.Solve();
 
             index = Params.IndexOfOutputParam("GeometricalPropagationModel");
             if (index != -1)
@@ -137,7 +137,7 @@ namespace DiGi.Communication.Rhino.Classes
             index = Params.IndexOfOutputParam("AngularPowerDistributionProfiles");
             if (index != -1)
             {
-                dataAccess.SetDataList(index, angularPowerDistributionCalculator?.AngularPowerDistributionProfiles?.ConvertAll(x => new GooAngularPowerDistributionProfile(x)));
+                dataAccess.SetDataList(index, angularPowerDistributionSolver?.AngularPowerDistributionProfiles?.ConvertAll(x => new GooAngularPowerDistributionProfile(x)));
             }
 
             if (index_Succeeded != -1)

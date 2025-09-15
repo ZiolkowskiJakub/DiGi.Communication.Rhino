@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.ComputeSharp.Rhino.Classes
 {
-    public class CalculateScattering : VariableParameterComponent
+    public class SolveScattering : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
@@ -28,9 +28,9 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public CalculateScattering()
-          : base("Communication.CalculateScattering", "Communication.CalculateScattering",
-              "Calculates Scattering",
+        public SolveScattering()
+          : base("Communication.SolveScattering", "Communication.SolveScattering",
+              "Solves Scattering",
               "DiGi", "DiGi.Communication")
         {
         }
@@ -129,21 +129,21 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
 
             geometricalPropagationModel = new Communication.Classes.GeometricalPropagationModel(geometricalPropagationModel);
 
-            ComputeSharp.Classes.ScatteringCalculatorOptions scatteringCalculatorOptions = new()
+            ComputeSharp.Classes.ScatteringSolverOptions scatteringSolverOptions = new()
             {
                 PointDensityFactor = pointDensityFactor,
                 AngleFactor = angleFactor,
                 Tolerance = tolerance,
             };
 
-            ComputeSharp.Classes.ScatteringCalculator scatteringCalculator = new()
+            ComputeSharp.Classes.ScatteringSolver scatteringSolver = new()
             {
                 GeometricalPropagationModel = geometricalPropagationModel,
-                ScatteringCalculatorOptions = scatteringCalculatorOptions
+                ScatteringSolverOptions = scatteringSolverOptions
 
             };
 
-            bool succedded = scatteringCalculator.Calculate();
+            bool succedded = scatteringSolver.Solve();
 
             index = Params.IndexOfOutputParam("GeometricalPropagationModel");
             if (index != -1)
@@ -154,7 +154,7 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
             index = Params.IndexOfOutputParam("ScatteringProfiles");
             if (index != -1)
             {
-                dataAccess.SetDataList(index, scatteringCalculator?.ScatteringProfiles?.ConvertAll(x => new GooScatteringProfile(x)));
+                dataAccess.SetDataList(index, scatteringSolver?.ScatteringProfiles?.ConvertAll(x => new GooScatteringProfile(x)));
             }
 
             if (index_Succeeded != -1)
