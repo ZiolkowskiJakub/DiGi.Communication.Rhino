@@ -14,7 +14,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("03574bd6-d400-4f85-841b-97b0e630d7da");
+        public override Guid ComponentGuid => new ("03574bd6-d400-4f85-841b-97b0e630d7da");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -40,11 +40,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
+                List<Param> result = [];
                 result.Add(new Param(new Param_Number() { Name = "Delays", NickName = "Delays", Description = "Delays", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
                 result.Add(new Param(new Param_Number() { Name = "Powers", NickName = "Powers", Description = "Powers", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -55,9 +55,9 @@ namespace DiGi.Communication.Rhino.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
+                List<Param> result = [];
                 result.Add(new Param(new GooSimpleMultipathPowerDelayProfileParam() { Name = "SimpleMultipathPowerDelayProfile", NickName = "SimpleMultipathPowerDelayProfile", Description = "DiGi Communication SimpleMultipathPowerDelayProfile", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -72,7 +72,7 @@ namespace DiGi.Communication.Rhino.Classes
             int index;
 
             index = Params.IndexOfInputParam("Delays");
-            List<double> delays = new List<double>();
+            List<double> delays = [];
             if (index == -1 || !dataAccess.GetDataList(index, delays) || delays == null || delays.Count == 0)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -80,7 +80,7 @@ namespace DiGi.Communication.Rhino.Classes
             }
 
             index = Params.IndexOfInputParam("Powers");
-            List<double> powers = new List<double>();
+            List<double> powers = [];
             if (index == -1 || !dataAccess.GetDataList(index, powers) || powers == null || powers.Count == 0)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -93,13 +93,13 @@ namespace DiGi.Communication.Rhino.Classes
             delays.Extend(count);
             powers.Extend(count);
 
-            Dictionary<double, double> dictionary = new Dictionary<double, double>();
+            Dictionary<double, double> dictionary = [];
             for (int i =0; i < count; i++)
             {
                 dictionary[delays[i]] = powers[i];
             }
 
-            Communication.Classes.SimpleMultipathPowerDelayProfile simpleMultipathPowerDelayProfile = new Communication.Classes.SimpleMultipathPowerDelayProfile(dictionary);
+            Communication.Classes.SimpleMultipathPowerDelayProfile simpleMultipathPowerDelayProfile = new(dictionary);
 
             index = Params.IndexOfOutputParam("SimpleMultipathPowerDelayProfile");
             if (index != -1)
