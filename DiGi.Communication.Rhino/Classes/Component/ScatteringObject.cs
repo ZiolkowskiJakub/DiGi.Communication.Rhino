@@ -14,7 +14,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("bc1c20b0-ddf9-4f6e-9c36-0ab1bb0a2753");
+        public override Guid ComponentGuid => new("bc1c20b0-ddf9-4f6e-9c36-0ab1bb0a2753");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -95,7 +95,7 @@ namespace DiGi.Communication.Rhino.Classes
             index = Params.IndexOfInputParam("ScatteringCoefficient");
             if (index != -1)
             {
-                if(!dataAccess.GetData(index, ref scatteringCoefficient))
+                if (!dataAccess.GetData(index, ref scatteringCoefficient))
                 {
                     scatteringCoefficient = 1;
                 }

@@ -14,7 +14,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("03574bd6-d400-4f85-841b-97b0e630d7da");
+        public override Guid ComponentGuid => new("03574bd6-d400-4f85-841b-97b0e630d7da");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -94,7 +94,7 @@ namespace DiGi.Communication.Rhino.Classes
             powers.Extend(count);
 
             Dictionary<double, double> dictionary = [];
-            for (int i =0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 dictionary[delays[i]] = powers[i];
             }

@@ -31,12 +31,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             return new GooGeometricalPropagationModel(Value);
         }
-
     }
 
     public class GooGeometricalPropagationModelParam : GooBakeAwareSerializableParam<GooGeometricalPropagationModel, Communication.Classes.GeometricalPropagationModel>
     {
-        public override Guid ComponentGuid => new ("c88cfd89-5b8b-4303-a40a-dd83fff05d8a");
+        public override Guid ComponentGuid => new("c88cfd89-5b8b-4303-a40a-dd83fff05d8a");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

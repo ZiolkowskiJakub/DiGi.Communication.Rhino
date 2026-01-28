@@ -25,13 +25,13 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 List<ScatteringPointGroup>? scatteringPointGroups = Value?.ScatteringPointGroups;
-                if(scatteringPointGroups == null)
+                if (scatteringPointGroups == null)
                 {
                     return null;
                 }
 
                 List<IGeometry> geometries = [];
-                foreach(ScatteringPointGroup scatteringPointGroup in scatteringPointGroups)
+                foreach (ScatteringPointGroup scatteringPointGroup in scatteringPointGroups)
                 {
                     scatteringPointGroup?.Points?.ForEach(x => geometries.Add(x));
                 }
@@ -44,12 +44,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             return new GooScattering(Value);
         }
-
     }
 
     public class GooScatteringParam : GooBakeAwareSerializableParam<GooScattering, IScattering>
     {
-        public override Guid ComponentGuid => new ("760f3e12-4622-4efb-862f-90e15b7532b8");
+        public override Guid ComponentGuid => new("760f3e12-4622-4efb-862f-90e15b7532b8");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

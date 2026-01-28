@@ -1,7 +1,4 @@
-﻿using DiGi.Communication.Classes;
-using DiGi.Communication.Interfaces;
-using DiGi.Communication.Rhino.Classes;
-using DiGi.Core.Classes;
+﻿using DiGi.Communication.Rhino.Classes;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
@@ -16,7 +13,7 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("f22be95a-de19-4379-a31f-966b65ea9884");
+        public override Guid ComponentGuid => new("f22be95a-de19-4379-a31f-966b65ea9884");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -91,7 +88,7 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
         protected override void SolveInstance(IGH_DataAccess dataAccess)
         {
             int index_Succeeded = Params.IndexOfOutputParam("Succeeded");
-            if(index_Succeeded != -1)
+            if (index_Succeeded != -1)
             {
                 dataAccess.SetData(index_Succeeded, false);
             }
@@ -140,7 +137,6 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
             {
                 GeometricalPropagationModel = geometricalPropagationModel,
                 ScatteringSolverOptions = scatteringSolverOptions
-
             };
 
             bool succedded = scatteringSolver.Solve();

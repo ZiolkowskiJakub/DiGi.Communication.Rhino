@@ -8,10 +8,8 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino
 {
-
     public static partial class Inspect
     {
-
         [Inspect("Location_1", "Location_1", "First location")]
         public static GooPoint3D? Location_1(this Interfaces.IScatteringProfile? scatteringProfile)
         {
@@ -21,7 +19,7 @@ namespace DiGi.Communication.Rhino
             }
 
             Geometry.Spatial.Classes.Point3D? location = scatteringProfile.Location_1;
-        
+
             return location == null ? null : new GooPoint3D(location);
         }
 
@@ -47,13 +45,13 @@ namespace DiGi.Communication.Rhino
             }
 
             IEnumerable<Scattering>? scatterings = scatteringProfile.Scatterings;
-            if(scatterings == null)
+            if (scatterings == null)
             {
                 return null;
             }
 
             List<GooScattering> result = [];
-            foreach(Scattering scattering in scatterings)
+            foreach (Scattering scattering in scatterings)
             {
                 result.Add(new GooScattering(scattering));
             }

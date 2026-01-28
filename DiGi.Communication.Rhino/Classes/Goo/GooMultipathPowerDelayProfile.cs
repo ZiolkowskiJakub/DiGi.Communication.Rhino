@@ -22,12 +22,11 @@ namespace DiGi.Communication.Rhino.Classes.Goo
         {
             return new GooMultipathPowerDelayProfile(Value);
         }
-
     }
 
     public class GooMultipathPowerDelayProfileParam : GooPresistentParam<GooMultipathPowerDelayProfile, IMultipathPowerDelayProfile>
     {
-        public override Guid ComponentGuid => new ("f0a0fe3e-578d-43e2-8c06-cd3a23de6c1e");
+        public override Guid ComponentGuid => new("f0a0fe3e-578d-43e2-8c06-cd3a23de6c1e");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

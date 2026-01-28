@@ -1,5 +1,4 @@
 ﻿using DiGi.Communication.Rhino.Classes.Goo;
-using DiGi.Core;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
@@ -13,7 +12,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("f73be78e-d0a6-411b-a855-804f4a86fd97");
+        public override Guid ComponentGuid => new("f73be78e-d0a6-411b-a855-804f4a86fd97");
 
         /// <summary>
         /// Provides an Icon for the component.

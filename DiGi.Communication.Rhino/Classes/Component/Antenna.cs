@@ -12,7 +12,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("28e14ad3-3a74-4f27-a19e-348ddc68a002");
+        public override Guid ComponentGuid => new("28e14ad3-3a74-4f27-a19e-348ddc68a002");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -88,7 +88,7 @@ namespace DiGi.Communication.Rhino.Classes
                 dataAccess.GetDataList(index, functions);
             }
 
-            if(functions == null || functions.Count == 0)
+            if (functions == null || functions.Count == 0)
             {
                 functions = [Enums.Function.Transmitter, Enums.Function.Receiver];
             }

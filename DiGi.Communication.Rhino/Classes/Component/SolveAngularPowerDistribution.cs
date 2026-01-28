@@ -1,5 +1,4 @@
-﻿using DiGi.Communication.Rhino.Classes;
-using DiGi.Rhino.Core.Classes;
+﻿using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
@@ -13,7 +12,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("25da38ff-35dd-418d-8d0e-b961ed9995e2");
+        public override Guid ComponentGuid => new("25da38ff-35dd-418d-8d0e-b961ed9995e2");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -82,7 +81,7 @@ namespace DiGi.Communication.Rhino.Classes
         protected override void SolveInstance(IGH_DataAccess dataAccess)
         {
             int index_Succeeded = Params.IndexOfOutputParam("Succeeded");
-            if(index_Succeeded != -1)
+            if (index_Succeeded != -1)
             {
                 dataAccess.SetData(index_Succeeded, false);
             }
@@ -123,7 +122,6 @@ namespace DiGi.Communication.Rhino.Classes
             {
                 GeometricalPropagationModel = geometricalPropagationModel,
                 AngularPowerDistributionSolverOptions = angularPowerDistributionSolverOptions
-
             };
 
             bool succedded = angularPowerDistributionSolver.Solve();

@@ -31,12 +31,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             return new GooScatteringPointGroup(Value);
         }
-
     }
 
     public class GooScatteringPointGroupParam : GooBakeAwareSerializableParam<GooScatteringPointGroup, ScatteringPointGroup>
     {
-        public override Guid ComponentGuid => new ("b7f65893-bb53-46f1-8538-cdb9d0ac5c81");
+        public override Guid ComponentGuid => new("b7f65893-bb53-46f1-8538-cdb9d0ac5c81");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

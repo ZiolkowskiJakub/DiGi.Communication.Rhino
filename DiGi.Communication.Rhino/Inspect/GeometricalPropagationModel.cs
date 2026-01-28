@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino
 {
-
     public static partial class Inspect
     {
         [Inspect("AngularPowerDistributionProfiles", "AngularPowerDistributionProfiles", "AngularPowerDistributionProfiles")]
@@ -42,13 +41,13 @@ namespace DiGi.Communication.Rhino
             }
 
             List<IAntenna>? antennas = geometricalPropagationModel.GetAntennas<IAntenna>();
-            if(antennas == null)
+            if (antennas == null)
             {
                 return null;
             }
 
             List<GooAntenna> result = [];
-            foreach(IAntenna antenna in antennas)
+            foreach (IAntenna antenna in antennas)
             {
                 result.Add(new GooAntenna(antenna));
             }
@@ -101,7 +100,7 @@ namespace DiGi.Communication.Rhino
 
             return result;
         }
-        
+
         [Inspect("ScatteringProfiles", "ScatteringProfiles", "ScatteringProfiles")]
         public static IEnumerable? ScatteringProfiles(this Communication.Classes.GeometricalPropagationModel? geometricalPropagationModel)
         {

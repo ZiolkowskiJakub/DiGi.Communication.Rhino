@@ -26,12 +26,12 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 IEnumerable<Scattering>? scatterings = Value?.Scatterings;
-                if(scatterings == null)
+                if (scatterings == null)
                 {
                     return null;
                 }
 
-                if(Value?.Location_1 is not Point3D location_1)
+                if (Value?.Location_1 is not Point3D location_1)
                 {
                     return null;
                 }
@@ -42,23 +42,23 @@ namespace DiGi.Communication.Rhino.Classes
                 }
 
                 List<IGeometry> geometries = [];
-                foreach(Scattering scattering in scatterings)
+                foreach (Scattering scattering in scatterings)
                 {
                     List<ScatteringPointGroup>? scatteringPointGroups = scattering.ScatteringPointGroups;
-                    if(scatteringPointGroups == null)
+                    if (scatteringPointGroups == null)
                     {
                         continue;
                     }
 
-                    foreach(ScatteringPointGroup scatteringPointGroup in scatteringPointGroups)
+                    foreach (ScatteringPointGroup scatteringPointGroup in scatteringPointGroups)
                     {
                         List<Point3D>? point3Ds = scatteringPointGroup?.Points;
-                        if(point3Ds == null)
+                        if (point3Ds == null)
                         {
                             continue;
                         }
 
-                        foreach(Point3D point3D in point3Ds)
+                        foreach (Point3D point3D in point3Ds)
                         {
                             geometries.Add(new Polyline3D([location_1, point3D, location_2], false));
                         }
@@ -77,7 +77,7 @@ namespace DiGi.Communication.Rhino.Classes
 
     public class GooScatteringProfileParam : GooBakeAwareSerializableParam<GooScatteringProfile, IScatteringProfile>
     {
-        public override Guid ComponentGuid => new ("6568b5cb-7b25-4ff7-ad94-613e3562db78");
+        public override Guid ComponentGuid => new("6568b5cb-7b25-4ff7-ad94-613e3562db78");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

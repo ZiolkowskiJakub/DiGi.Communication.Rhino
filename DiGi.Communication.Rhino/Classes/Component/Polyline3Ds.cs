@@ -15,7 +15,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("a8479a5e-031d-4d17-9a5d-6d433c82b756");
+        public override Guid ComponentGuid => new("a8479a5e-031d-4d17-9a5d-6d433c82b756");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -95,18 +95,17 @@ namespace DiGi.Communication.Rhino.Classes
 
             delay = Core.Query.Round(delay * 1e-6, 1e-12);
 
-
             List<string>? references = [];
             index = Params.IndexOfInputParam("References");
-            if(index != -1)
+            if (index != -1)
             {
-                if(!dataAccess.GetDataList(index, references))
+                if (!dataAccess.GetDataList(index, references))
                 {
                     references = [];
                 }
             }
 
-            if(references != null && references.Count == 0)
+            if (references != null && references.Count == 0)
             {
                 references = null;
             }

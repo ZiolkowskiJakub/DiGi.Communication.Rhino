@@ -4,10 +4,8 @@ using DiGi.Rhino.Geometry.Spatial.Classes;
 
 namespace DiGi.Communication.Rhino
 {
-
     public static partial class Inspect
     {
-
         [Inspect("Vector", "Vector", "Vector")]
         public static GooVector3D? Vector(this Ray? ray)
         {
@@ -17,7 +15,7 @@ namespace DiGi.Communication.Rhino
             }
 
             Geometry.Spatial.Classes.Vector3D? vector = ray.Vector;
-        
+
             return vector == null ? null : new GooVector3D(vector);
         }
 

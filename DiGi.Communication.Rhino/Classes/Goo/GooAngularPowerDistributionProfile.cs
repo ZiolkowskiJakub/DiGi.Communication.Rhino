@@ -26,7 +26,7 @@ namespace DiGi.Communication.Rhino.Classes
             get
             {
                 IEnumerable<AngularPowerDistribution>? angularPowerDistributions = Value?.AngularPowerDistributions;
-                if(angularPowerDistributions == null)
+                if (angularPowerDistributions == null)
                 {
                     return null;
                 }
@@ -34,15 +34,15 @@ namespace DiGi.Communication.Rhino.Classes
                 Point3D? location = Value?.Location;
 
                 List<IGeometry> geometries = [];
-                foreach(AngularPowerDistribution angularPowerDistribution in angularPowerDistributions)
+                foreach (AngularPowerDistribution angularPowerDistribution in angularPowerDistributions)
                 {
                     List<Vector3D>? vector3Ds = angularPowerDistribution.Vectors;
-                    if(vector3Ds == null)
+                    if (vector3Ds == null)
                     {
                         continue;
                     }
 
-                    foreach(Vector3D vector3D in vector3Ds)
+                    foreach (Vector3D vector3D in vector3Ds)
                     {
                         geometries.Add(new Segment3D(location?.GetMoved(vector3D.GetInversed()), location));
                     }
@@ -56,12 +56,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             return new GooAngularPowerDistributionProfile(Value);
         }
-
     }
 
     public class GooAngularPowerDistributionProfileParam : GooBakeAwareSerializableParam<GooAngularPowerDistributionProfile, IAngularPowerDistributionProfile>
     {
-        public override Guid ComponentGuid => new ("493c2a67-0e30-47bd-bb35-df3defbc9f0d");
+        public override Guid ComponentGuid => new("493c2a67-0e30-47bd-bb35-df3defbc9f0d");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

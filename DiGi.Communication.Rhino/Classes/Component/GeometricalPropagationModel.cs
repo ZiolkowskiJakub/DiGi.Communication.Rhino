@@ -13,7 +13,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("7b5a71e5-d703-48b7-9138-abf958e3e8f6");
+        public override Guid ComponentGuid => new("7b5a71e5-d703-48b7-9138-abf958e3e8f6");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -107,13 +107,12 @@ namespace DiGi.Communication.Rhino.Classes
                 dataAccess.GetDataList(index, scatteringObjects);
             }
 
-
             Communication.Classes.GeometricalPropagationModel geometricalPropagationModel = new();
             geometricalPropagationModel.Assign(multipathPowerDelayProfile, antenna_1, antenna_2);
 
-            if(scatteringObjects != null)
+            if (scatteringObjects != null)
             {
-                foreach(IScatteringObject scatteringObject in scatteringObjects)
+                foreach (IScatteringObject scatteringObject in scatteringObjects)
                 {
                     geometricalPropagationModel.Update(scatteringObject);
                 }

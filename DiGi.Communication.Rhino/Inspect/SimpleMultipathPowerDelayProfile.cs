@@ -5,10 +5,8 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino
 {
-
     public static partial class Inspect
     {
-
         [Inspect("Delays", "Delays", "Delays [μm]")]
         public static IEnumerable? Delays(this Interfaces.ISimpleMultipathPowerDelayProfile? simpleMultipathPowerDelayProfile)
         {
@@ -18,7 +16,7 @@ namespace DiGi.Communication.Rhino
             }
 
             HashSet<double>? delays = simpleMultipathPowerDelayProfile.Delays;
-            if(delays == null)
+            if (delays == null)
             {
                 return null;
             }

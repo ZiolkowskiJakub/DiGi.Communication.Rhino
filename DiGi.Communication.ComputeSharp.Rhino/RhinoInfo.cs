@@ -14,7 +14,7 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
         //Return a short string describing the purpose of this GHA library.
         public override string Description => "";
 
-        public override Guid Id => new ("97dc83eb-e746-4838-8644-57f96b834025");
+        public override Guid Id => new("97dc83eb-e746-4838-8644-57f96b834025");
 
         //Return a string identifying you or your company.
         public override string AuthorName => "Jakub Ziolkowski";

@@ -9,10 +9,8 @@ using System.Linq;
 
 namespace DiGi.Communication.Rhino
 {
-
     public static partial class Inspect
     {
-
         [Inspect("AngularPowerDistributions", "AngularPowerDistributions", "AngularPowerDistributions")]
         public static IEnumerable? AngularPowerDistributions(this Interfaces.IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {
@@ -57,7 +55,7 @@ namespace DiGi.Communication.Rhino
 
             return new GooPoint3D(angularPowerDistributionProfile.Location);
         }
-        
+
         [Inspect("Rays", "Rays", "Rays")]
         public static IEnumerable? Rays(this Interfaces.IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {
@@ -67,13 +65,13 @@ namespace DiGi.Communication.Rhino
             }
 
             Geometry.Spatial.Classes.Point3D? location = angularPowerDistributionProfile.Location;
-            if(location == null)
+            if (location == null)
             {
                 return null;
             }
 
             IEnumerable<AngularPowerDistribution>? angularPowerDistributions = angularPowerDistributionProfile.AngularPowerDistributions;
-            if(angularPowerDistributions == null)
+            if (angularPowerDistributions == null)
             {
                 return null;
             }
@@ -81,8 +79,8 @@ namespace DiGi.Communication.Rhino
             List<Geometry.Spatial.Classes.Vector3D> vector3Ds = [];
             foreach (AngularPowerDistribution angularPowerDistribution in angularPowerDistributions)
             {
-                List< Geometry.Spatial.Classes.Vector3D>? vector3Ds_Temp = angularPowerDistribution?.Vectors;
-                if(vector3Ds_Temp == null)
+                List<Geometry.Spatial.Classes.Vector3D>? vector3Ds_Temp = angularPowerDistribution?.Vectors;
+                if (vector3Ds_Temp == null)
                 {
                     continue;
                 }

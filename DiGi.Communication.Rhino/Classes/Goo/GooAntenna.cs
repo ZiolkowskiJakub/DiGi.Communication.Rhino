@@ -25,7 +25,6 @@ namespace DiGi.Communication.Rhino.Classes
             {
                 Point3D? point3D = Value?.Location;
 
-
                 return point3D == null ? null : [point3D];
             }
         }
@@ -34,12 +33,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             return new GooAntenna(Value);
         }
-
     }
 
     public class GooAntennaParam : GooBakeAwareSerializableParam<GooAntenna, IAntenna>
     {
-        public override Guid ComponentGuid => new ("adfd6214-0454-4a7c-8cdc-c8341fd41d17");
+        public override Guid ComponentGuid => new("adfd6214-0454-4a7c-8cdc-c8341fd41d17");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

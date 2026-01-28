@@ -13,7 +13,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("736b1a41-efe1-4e70-b04e-94b27db8ddf9");
+        public override Guid ComponentGuid => new("736b1a41-efe1-4e70-b04e-94b27db8ddf9");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -103,7 +103,7 @@ namespace DiGi.Communication.Rhino.Classes
             global::Rhino.Geometry.Mesh[] meshes = global::Rhino.Geometry.Mesh.CreateFromBrep(brep, new global::Rhino.Geometry.MeshingParameters(0.5));
 
             List<Communication.Classes.ScatteringObject>? scatteringObjects = null;
-            if(meshes != null)
+            if (meshes != null)
             {
                 scatteringObjects = [];
                 foreach (global::Rhino.Geometry.Mesh mesh in meshes)

@@ -2,7 +2,6 @@
 using DiGi.Communication.Interfaces;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
-using DiGi.Rhino.Geometry.Spatial.Classes;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
 using System;
@@ -15,7 +14,7 @@ namespace DiGi.Communication.Rhino.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("77978b5a-9aa0-43e8-af02-9f44a42f052e");
+        public override Guid ComponentGuid => new("77978b5a-9aa0-43e8-af02-9f44a42f052e");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -97,7 +96,7 @@ namespace DiGi.Communication.Rhino.Classes
             index = Params.IndexOfInputParam("Factor");
             if (index != -1)
             {
-                if(!dataAccess.GetData(index, ref factor) || double.IsNaN(factor))
+                if (!dataAccess.GetData(index, ref factor) || double.IsNaN(factor))
                 {
                     factor = 1.0;
                 }

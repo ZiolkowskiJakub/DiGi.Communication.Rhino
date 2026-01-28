@@ -5,10 +5,8 @@ using System.Collections;
 
 namespace DiGi.Communication.Rhino
 {
-
     public static partial class Inspect
     {
-
         [Inspect("Vectors", "Vectors", "Vectors")]
         public static IEnumerable? Vectors(this Interfaces.IAngularPowerDistribution? angularPowerDistribution)
         {

@@ -3,10 +3,8 @@ using DiGi.Rhino.Core.Classes;
 
 namespace DiGi.Communication.Rhino
 {
-
     public static partial class Inspect
     {
-
         [Inspect("SimpleMultipathPowerDelayProfile_Visible", "SimpleMultipathPowerDelayProfile_Visible", "SimpleMultipathPowerDelayProfile for case where antennas are visible")]
         public static GooSimpleMultipathPowerDelayProfile? SimpleMultipathPowerDelayProfile_Visible(this Interfaces.IComplexMultipathPowerDelayProfile? complexMultipathPowerDelayProfile)
         {
@@ -32,6 +30,5 @@ namespace DiGi.Communication.Rhino
 
             return simpleMultipathPowerDelayProfile == null ? null : new GooSimpleMultipathPowerDelayProfile(simpleMultipathPowerDelayProfile);
         }
-
     }
 }

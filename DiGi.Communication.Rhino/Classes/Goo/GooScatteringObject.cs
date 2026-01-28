@@ -33,12 +33,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             return new GooScatteringObject(Value);
         }
-
     }
 
     public class GooScatteringObjectParam : GooBakeAwareSerializableParam<GooScatteringObject, IScatteringObject>
     {
-        public override Guid ComponentGuid => new ("dcaba3c2-38c2-4520-817d-a6f157277457");
+        public override Guid ComponentGuid => new("dcaba3c2-38c2-4520-817d-a6f157277457");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

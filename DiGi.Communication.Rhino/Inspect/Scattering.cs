@@ -5,10 +5,8 @@ using System.Collections;
 
 namespace DiGi.Communication.Rhino
 {
-
     public static partial class Inspect
     {
-
         [Inspect("ScatteringPointGroups", "ScatteringPointGroups", "ScatteringPointGroups")]
         public static IEnumerable? ScatteringPointGroups(this Communication.Classes.Scattering? scattering)
         {

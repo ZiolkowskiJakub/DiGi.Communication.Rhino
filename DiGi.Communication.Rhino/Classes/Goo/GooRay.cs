@@ -43,12 +43,11 @@ namespace DiGi.Communication.Rhino.Classes
         {
             return new GooRay(Value);
         }
-
     }
 
     public class GooRayParam : GooBakeAwareSerializableParam<GooRay, Ray>
     {
-        public override Guid ComponentGuid => new ("5d3b6300-2aac-4ea5-9d6e-f009857c568a");
+        public override Guid ComponentGuid => new("5d3b6300-2aac-4ea5-9d6e-f009857c568a");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

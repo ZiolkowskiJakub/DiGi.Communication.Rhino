@@ -6,7 +6,6 @@ using System.Collections;
 
 namespace DiGi.Communication.Rhino
 {
-
     public static partial class Inspect
     {
         [Inspect("Reference", "Reference", "Reference")]
