@@ -47,15 +47,15 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
                 Param_Number param_Number;
 
                 param_Number = new Param_Number() { Name = "PointDensityFactor", NickName = "PointDensityFactor", Description = "Point Density Factor", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(Constans.Factor.PointDensity);
+                param_Number.SetPersistentData(Constants.Factor.PointDensity);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
                 param_Number = new Param_Number() { Name = "AngleFactor", NickName = "AngleFactor", Description = "Angle Factor", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(Constans.Factor.Angle);
+                param_Number.SetPersistentData(Constants.Factor.Angle);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
                 param_Number = new Param_Number() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(Core.Constans.Tolerance.Distance);
+                param_Number.SetPersistentData(Core.Constants.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
                 return [.. result];
@@ -103,21 +103,21 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
                 return;
             }
 
-            double pointDensityFactor = Constans.Factor.PointDensity;
+            double pointDensityFactor = Constants.Factor.PointDensity;
             index = Params.IndexOfInputParam("PointDensityFactor");
             if (index != -1)
             {
                 dataAccess.GetData(index, ref pointDensityFactor);
             }
 
-            double angleFactor = Constans.Factor.Angle;
+            double angleFactor = Constants.Factor.Angle;
             index = Params.IndexOfInputParam("AngleFactor");
             if (index != -1)
             {
                 dataAccess.GetData(index, ref angleFactor);
             }
 
-            double tolerance = Core.Constans.Tolerance.Distance;
+            double tolerance = Core.Constants.Tolerance.Distance;
             index = Params.IndexOfInputParam("Tolerance");
             if (index != -1)
             {
