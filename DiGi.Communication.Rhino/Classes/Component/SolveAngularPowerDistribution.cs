@@ -48,7 +48,7 @@ namespace DiGi.Communication.Rhino.Classes
                 result.Add(new Param(param_Integer, ParameterVisibility.Voluntary));
 
                 Param_Number param_Number = new() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(Core.Constants.Tolerance.Distance);
+                param_Number.SetPersistentData(Core.Constans.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
                 return [.. result];
@@ -103,7 +103,7 @@ namespace DiGi.Communication.Rhino.Classes
                 dataAccess.GetData(index, ref rayCount);
             }
 
-            double tolerance = Core.Constants.Tolerance.Distance;
+            double tolerance = Core.Constans.Tolerance.Distance;
             index = Params.IndexOfInputParam("Tolerance");
             if (index != -1)
             {
