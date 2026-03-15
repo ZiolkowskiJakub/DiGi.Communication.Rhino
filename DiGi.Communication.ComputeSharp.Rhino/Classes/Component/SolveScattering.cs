@@ -55,7 +55,7 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
                 param_Number = new Param_Number() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(Core.Constans.Tolerance.Distance);
+                param_Number.SetPersistentData(Core.Constants.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
                 return [.. result];
@@ -117,7 +117,7 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
                 dataAccess.GetData(index, ref angleFactor);
             }
 
-            double tolerance = Core.Constans.Tolerance.Distance;
+            double tolerance = Core.Constants.Tolerance.Distance;
             index = Params.IndexOfInputParam("Tolerance");
             if (index != -1)
             {
