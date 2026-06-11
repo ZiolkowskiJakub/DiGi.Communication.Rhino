@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
+    /// <summary>
+    /// Component that calculates rays based on an angular power distribution profile and delay.
+    /// </summary>
     public class Rays : VariableParameterComponent
     {
         /// <summary>
@@ -16,11 +19,11 @@ namespace DiGi.Communication.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("77978b5a-9aa0-43e8-af02-9f44a42f052e");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

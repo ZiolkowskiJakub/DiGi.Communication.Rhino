@@ -5,6 +5,11 @@ namespace DiGi.Communication.Rhino
 {
     public static partial class Inspect
     {
+        /// <summary>
+        /// Returns a GooSimpleMultipathPowerDelayProfile for the case where antennas are visible.
+        /// </summary>
+        /// <param name="complexMultipathPowerDelayProfile">The complex multipath power delay profile to inspect.</param>
+        /// <returns>A <see cref="GooSimpleMultipathPowerDelayProfile"/> instance if successful; otherwise, null.</returns>
         [Inspect("SimpleMultipathPowerDelayProfile_Visible", "SimpleMultipathPowerDelayProfile_Visible", "SimpleMultipathPowerDelayProfile for case where antennas are visible")]
         public static GooSimpleMultipathPowerDelayProfile? SimpleMultipathPowerDelayProfile_Visible(this Interfaces.IComplexMultipathPowerDelayProfile? complexMultipathPowerDelayProfile)
         {
@@ -18,6 +23,11 @@ namespace DiGi.Communication.Rhino
             return simpleMultipathPowerDelayProfile == null ? null : new GooSimpleMultipathPowerDelayProfile(simpleMultipathPowerDelayProfile);
         }
 
+        /// <summary>
+        /// Returns a GooSimpleMultipathPowerDelayProfile for the case where antennas are hidden.
+        /// </summary>
+        /// <param name="complexMultipathPowerDelayProfile">The complex multipath power delay profile to inspect.</param>
+        /// <returns>A <see cref="GooSimpleMultipathPowerDelayProfile"/> instance if successful; otherwise, null.</returns>
         [Inspect("SimpleMultipathPowerDelayProfile_Hidden", "SimpleMultipathPowerDelayProfile_Hidden", "SimpleMultipathPowerDelayProfile for case where antennas are hidden")]
         public static GooSimpleMultipathPowerDelayProfile? SimpleMultipathPowerDelayProfile_Hidden(this Interfaces.IComplexMultipathPowerDelayProfile? complexMultipathPowerDelayProfile)
         {

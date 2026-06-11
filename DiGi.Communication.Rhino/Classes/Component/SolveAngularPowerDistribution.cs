@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
+    /// <summary>
+    /// Solves angular power distribution for a geometrical propagation model.
+    /// </summary>
     public class SolveAngularPowerDistribution : VariableParameterComponent
     {
         /// <summary>
@@ -14,11 +17,11 @@ namespace DiGi.Communication.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("25da38ff-35dd-418d-8d0e-b961ed9995e2");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

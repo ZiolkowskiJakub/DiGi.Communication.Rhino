@@ -9,6 +9,11 @@ namespace DiGi.Communication.Rhino
 {
     public static partial class Inspect
     {
+        /// <summary>
+        /// Retrieves the angular power distribution profiles from the specified geometrical propagation model.
+        /// </summary>
+        /// <param name="geometricalPropagationModel">The geometrical propagation model to inspect.</param>
+        /// <returns>A collection of <see cref="GooAngularPowerDistributionProfile"/> objects, or null if the model is null or contains no profiles.</returns>
         [Inspect("AngularPowerDistributionProfiles", "AngularPowerDistributionProfiles", "AngularPowerDistributionProfiles")]
         public static IEnumerable? AngularPowerDistributionProfiles(this Communication.Classes.GeometricalPropagationModel? geometricalPropagationModel)
         {
@@ -32,6 +37,11 @@ namespace DiGi.Communication.Rhino
             return result;
         }
 
+        /// <summary>
+        /// Retrieves the antennas from the specified geometrical propagation model.
+        /// </summary>
+        /// <param name="geometricalPropagationModel">The geometrical propagation model to inspect.</param>
+        /// <returns>A collection of <see cref="GooAntenna"/> objects, or null if the model is null or contains no antennas.</returns>
         [Inspect("Antennas", "Antennas", "Antennas")]
         public static IEnumerable? Antennas(this Communication.Classes.GeometricalPropagationModel? geometricalPropagationModel)
         {
@@ -55,6 +65,11 @@ namespace DiGi.Communication.Rhino
             return result;
         }
 
+        /// <summary>
+        /// Retrieves the multipath power delay profiles from the specified geometrical propagation model.
+        /// </summary>
+        /// <param name="geometricalPropagationModel">The geometrical propagation model to inspect.</param>
+        /// <returns>A collection of <see cref="GooMultipathPowerDelayProfile"/> objects, or null if the model is null or contains no profiles.</returns>
         [Inspect("MultipathPowerDelayProfiles", "MultipathPowerDelayProfiles", "MultipathPowerDelayProfiles")]
         public static IEnumerable? MultipathPowerDelayProfiles(this Communication.Classes.GeometricalPropagationModel? geometricalPropagationModel)
         {
@@ -78,6 +93,11 @@ namespace DiGi.Communication.Rhino
             return result;
         }
 
+        /// <summary>
+        /// Retrieves the scattering objects from the specified geometrical propagation model.
+        /// </summary>
+        /// <param name="geometricalPropagationModel">The geometrical propagation model to inspect.</param>
+        /// <returns>A collection of <see cref="GooScatteringObject"/> objects, or null if the model is null or contains no objects.</returns>
         [Inspect("ScatteringObjects", "ScatteringObjects", "ScatteringObjects")]
         public static IEnumerable? ScatteringObjects(this Communication.Classes.GeometricalPropagationModel? geometricalPropagationModel)
         {
@@ -101,6 +121,11 @@ namespace DiGi.Communication.Rhino
             return result;
         }
 
+        /// <summary>
+        /// Retrieves the scattering profiles from the specified geometrical propagation model.
+        /// </summary>
+        /// <param name="geometricalPropagationModel">The geometrical propagation model to inspect.</param>
+        /// <returns>A collection of <see cref="GooScatteringProfile"/> objects, or null if the model is null or contains no profiles.</returns>
         [Inspect("ScatteringProfiles", "ScatteringProfiles", "ScatteringProfiles")]
         public static IEnumerable? ScatteringProfiles(this Communication.Classes.GeometricalPropagationModel? geometricalPropagationModel)
         {

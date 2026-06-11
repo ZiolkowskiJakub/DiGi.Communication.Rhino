@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.ComputeSharp.Rhino.Classes
 {
+    /// <summary>
+    /// Component that solves scattering based on a geometrical propagation model.
+    /// </summary>
     public class SolveScattering : VariableParameterComponent
     {
         /// <summary>
@@ -15,11 +18,11 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("f22be95a-de19-4379-a31f-966b65ea9884");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

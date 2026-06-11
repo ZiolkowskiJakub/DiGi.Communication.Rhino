@@ -7,6 +7,11 @@ namespace DiGi.Communication.Rhino
 {
     public static partial class Inspect
     {
+        /// <summary>
+        /// Retrieves the delays from the provided simple multipath power delay profile, converted to micrometers.
+        /// </summary>
+        /// <param name="simpleMultipathPowerDelayProfile">The simple multipath power delay profile instance.</param>
+        /// <returns>A collection of GH_Number representing the delays in micrometers, or null if the input is null.</returns>
         [Inspect("Delays", "Delays", "Delays [μm]")]
         public static IEnumerable? Delays(this Interfaces.ISimpleMultipathPowerDelayProfile? simpleMultipathPowerDelayProfile)
         {
@@ -30,6 +35,11 @@ namespace DiGi.Communication.Rhino
             return result;
         }
 
+        /// <summary>
+        /// Retrieves the powers associated with the delays from the provided simple multipath power delay profile.
+        /// </summary>
+        /// <param name="simpleMultipathPowerDelayProfile">The simple multipath power delay profile instance.</param>
+        /// <returns>A collection of GH_Number representing the powers, or null if the input is null.</returns>
         [Inspect("Powers", "Powers", "Powers")]
         public static IEnumerable? Powers(this Interfaces.ISimpleMultipathPowerDelayProfile? simpleMultipathPowerDelayProfile)
         {

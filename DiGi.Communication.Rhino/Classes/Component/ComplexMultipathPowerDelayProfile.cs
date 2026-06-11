@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
+    /// <summary>
+    /// Component for creating a complex multipath power delay profile by combining profiles for visible and hidden antenna cases.
+    /// </summary>
     public class ComplexMultipathPowerDelayProfile : VariableParameterComponent
     {
         /// <summary>
@@ -14,15 +17,15 @@ namespace DiGi.Communication.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("f73be78e-d0a6-411b-a855-804f4a86fd97");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of the SAM_point3D class.
+        /// Initializes a new instance of the ComplexMultipathPowerDelayProfile class.
         /// </summary>
         public ComplexMultipathPowerDelayProfile()
           : base("Communication.ComplexMultipathPowerDelayProfile", "Communication.ComplexMultipathPowerDelayProfile",

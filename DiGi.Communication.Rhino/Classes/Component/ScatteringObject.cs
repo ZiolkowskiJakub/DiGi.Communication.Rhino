@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
+    /// <summary>
+    /// Represents a Grasshopper component that creates a scattering object for communication purposes.
+    /// </summary>
     public class ScatteringObject : VariableParameterComponent
     {
         /// <summary>
@@ -16,15 +19,15 @@ namespace DiGi.Communication.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("bc1c20b0-ddf9-4f6e-9c36-0ab1bb0a2753");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of the SAM_point3D class.
+        /// Initializes a new instance of the ScatteringObject class.
         /// </summary>
         public ScatteringObject()
           : base("Communication.ScatteringObject", "Communication.ScatteringObject",

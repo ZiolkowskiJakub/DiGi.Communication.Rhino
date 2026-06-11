@@ -10,6 +10,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
+    /// <summary>
+    /// Represents a Grasshopper component that generates 3D polylines based on scattering profiles and delay parameters.
+    /// </summary>
     public class Polyline3Ds : VariableParameterComponent
     {
         /// <summary>
@@ -17,15 +20,15 @@ namespace DiGi.Communication.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("a8479a5e-031d-4d17-9a5d-6d433c82b756");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets or sets the exposure of the component in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of the SAM_point3D class.
+        /// Initializes a new instance of the <see cref="Polyline3Ds"/> class.
         /// </summary>
         public Polyline3Ds()
           : base("Communication.Polyline3Ds", "Communication.Polyline3Ds",

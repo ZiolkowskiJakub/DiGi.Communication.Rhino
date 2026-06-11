@@ -11,6 +11,11 @@ namespace DiGi.Communication.Rhino
 {
     public static partial class Inspect
     {
+        /// <summary>
+        /// Gets the angular power distributions from the specified angular power distribution profile.
+        /// </summary>
+        /// <param name="angularPowerDistributionProfile">The angular power distribution profile.</param>
+        /// <returns>A collection of GooAngularPowerDistribution objects, or null if the profile is null.</returns>
         [Inspect("AngularPowerDistributions", "AngularPowerDistributions", "AngularPowerDistributions")]
         public static IEnumerable? AngularPowerDistributions(this Interfaces.IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {
@@ -22,6 +27,11 @@ namespace DiGi.Communication.Rhino
             return angularPowerDistributionProfile.AngularPowerDistributions?.ToList().ConvertAll(x => new GooAngularPowerDistribution(x));
         }
 
+        /// <summary>
+        /// Gets the delays from the specified angular power distribution profile converted to micrometers.
+        /// </summary>
+        /// <param name="angularPowerDistributionProfile">The angular power distribution profile.</param>
+        /// <returns>A collection of GH_Number objects representing delays in micrometers, or null if the profile or distributions are null.</returns>
         [Inspect("Delays", "Delays", "Delays [μm]")]
         public static IEnumerable? Delays(this Interfaces.IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {
@@ -45,6 +55,11 @@ namespace DiGi.Communication.Rhino
             return result;
         }
 
+        /// <summary>
+        /// Gets the location of the specified angular power distribution profile.
+        /// </summary>
+        /// <param name="angularPowerDistributionProfile">The angular power distribution profile.</param>
+        /// <returns>A GooPoint3D object representing the location, or null if the profile is null.</returns>
         [Inspect("Location", "Location", "Location")]
         public static GooPoint3D? Location(this Interfaces.IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {
@@ -56,6 +71,11 @@ namespace DiGi.Communication.Rhino
             return new GooPoint3D(angularPowerDistributionProfile.Location);
         }
 
+        /// <summary>
+        /// Gets the rays associated with the specified angular power distribution profile.
+        /// </summary>
+        /// <param name="angularPowerDistributionProfile">The angular power distribution profile.</param>
+        /// <returns>A collection of GooRay objects, or null if the profile or location is null.</returns>
         [Inspect("Rays", "Rays", "Rays")]
         public static IEnumerable? Rays(this Interfaces.IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {

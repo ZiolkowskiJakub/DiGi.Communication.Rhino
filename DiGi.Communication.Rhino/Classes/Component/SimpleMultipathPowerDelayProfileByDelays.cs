@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
+    /// <summary>
+    /// A component that creates a SimpleMultipathPowerDelayProfile using lists of delay and power values.
+    /// </summary>
     public class SimpleMultipathPowerDelayProfileByDelays : VariableParameterComponent
     {
         /// <summary>
@@ -16,11 +19,11 @@ namespace DiGi.Communication.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("03574bd6-d400-4f85-841b-97b0e630d7da");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

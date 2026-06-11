@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
+    /// <summary>
+    /// Component that creates a Simple Multipath Power Delay Profile based on a selected default profile.
+    /// </summary>
     public class SimpleMultipathPowerDelayProfile : VariableParameterComponent
     {
         /// <summary>
@@ -14,11 +17,11 @@ namespace DiGi.Communication.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("e970f03b-2557-4407-8551-601ae19ab301");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
+    /// <summary>
+    /// Component that creates scattering objects based on Brep geometry for DiGi communication.
+    /// </summary>
     public class ScatteringObjectByBrep : VariableParameterComponent
     {
         /// <summary>
@@ -15,11 +18,11 @@ namespace DiGi.Communication.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("736b1a41-efe1-4e70-b04e-94b27db8ddf9");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets or sets the exposure level of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

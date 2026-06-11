@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino.Classes
 {
+    /// <summary>
+    /// Represents a Grasshopper component that creates an ellipsoid based on two antennas and a time delay.
+    /// </summary>
     public class Ellipsoid : VariableParameterComponent
     {
         /// <summary>
@@ -16,11 +19,11 @@ namespace DiGi.Communication.Rhino.Classes
         /// </summary>
         public override Guid ComponentGuid => new("2e7e8de0-9110-49ae-bfd4-625b4489ab65");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
