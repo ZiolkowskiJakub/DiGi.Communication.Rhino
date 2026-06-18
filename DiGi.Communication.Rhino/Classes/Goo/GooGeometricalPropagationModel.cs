@@ -1,4 +1,4 @@
-﻿using DiGi.Communication.Interfaces;
+using DiGi.Communication.Interfaces;
 using DiGi.Core;
 using DiGi.Geometry.Core.Interfaces;
 using DiGi.Rhino.Geometry.Core.Classes;
@@ -29,10 +29,7 @@ namespace DiGi.Communication.Rhino.Classes
             Value = geometricalPropagationModel;
         }
 
-        /// <summary>
-        /// Gets the collection of geometries derived from the scattering objects within the propagation model.
-        /// </summary>
-        /// <returns>An array of <see cref="IGeometry"/> representing the scattering objects, or null if no value is present.</returns>
+        /// <summary> Gets the collection of geometries derived from the scattering objects within the propagation model. </summary>
         public override IGeometry[]? Geometries
         {
             get
@@ -56,12 +53,10 @@ namespace DiGi.Communication.Rhino.Classes
     /// </summary>
     public class GooGeometricalPropagationModelParam : GooBakeAwareSerializableParam<GooGeometricalPropagationModel, Communication.Classes.GeometricalPropagationModel>
     {
-        /// <summary>
-        /// Gets the unique identifier for the Grasshopper component associated with this parameter.
-        /// </summary>
-        /// <returns>A <see cref="Guid"/> representing the component's unique ID.</returns>
+        /// <summary> Gets the unique identifier for the Grasshopper component associated with this parameter. </summary>
         public override Guid ComponentGuid => new("c88cfd89-5b8b-4303-a40a-dd83fff05d8a");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
 }
+

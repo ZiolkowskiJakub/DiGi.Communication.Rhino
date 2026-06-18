@@ -1,4 +1,4 @@
-﻿using DiGi.Communication.Interfaces;
+using DiGi.Communication.Interfaces;
 using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
 using DiGi.Rhino.Geometry.Core.Classes;
@@ -29,10 +29,7 @@ namespace DiGi.Communication.Rhino.Classes
             Value = antenna;
         }
 
-        /// <summary>
-        /// Gets the geometry associated with the antenna, typically its location point.
-        /// </summary>
-        /// <returns>An array of <see cref="IGeometry"/> containing the antenna's location, or null if no value exists.</returns>
+        /// <summary> Gets the geometry associated with the antenna, typically its location point. </summary>
         public override IGeometry[]? Geometries
         {
             get
@@ -66,3 +63,4 @@ namespace DiGi.Communication.Rhino.Classes
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using DiGi.Communication.Interfaces;
+using DiGi.Communication.Interfaces;
 using DiGi.Rhino.Core.Classes;
 using Grasshopper.Kernel.Types;
 using System;
@@ -43,10 +43,7 @@ namespace DiGi.Communication.Rhino.Classes.Goo
     /// </summary>
     public class GooComplexMultipathPowerDelayProfileParam : GooPresistentParam<GooComplexMultipathPowerDelayProfile, IComplexMultipathPowerDelayProfile>
     {
-        /// <summary>
-        /// Gets the unique identifier for the component.
-        /// </summary>
-        /// <returns>The unique <see cref="Guid"/> of the component.</returns>
+        /// <summary> Gets the unique identifier for the component. </summary>
         public override Guid ComponentGuid => new("c3503525-933d-400b-9958-410d9bf418e3");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
@@ -60,3 +57,4 @@ namespace DiGi.Communication.Rhino.Classes.Goo
         }
     }
 }
+

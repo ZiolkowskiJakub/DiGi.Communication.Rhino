@@ -1,4 +1,4 @@
-﻿using DiGi.Communication.Classes;
+using DiGi.Communication.Classes;
 using DiGi.Communication.Interfaces;
 using DiGi.Geometry.Core.Interfaces;
 using DiGi.Rhino.Geometry.Core.Classes;
@@ -30,10 +30,7 @@ namespace DiGi.Communication.Rhino.Classes
             Value = scattering;
         }
 
-        /// <summary>
-        /// Gets the collection of geometries associated with the scattering point groups.
-        /// </summary>
-        /// <returns>An array of <see cref="IGeometry"/> objects, or null if no value is present.</returns>
+        /// <summary> Gets the collection of geometries associated with the scattering point groups. </summary>
         public override IGeometry[]? Geometries
         {
             get
@@ -77,3 +74,4 @@ namespace DiGi.Communication.Rhino.Classes
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
 }
+

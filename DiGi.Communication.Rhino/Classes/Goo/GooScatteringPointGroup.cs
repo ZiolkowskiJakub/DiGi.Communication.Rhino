@@ -1,4 +1,4 @@
-﻿using DiGi.Communication.Classes;
+using DiGi.Communication.Classes;
 using DiGi.Geometry.Core.Interfaces;
 using DiGi.Rhino.Geometry.Core.Classes;
 using Grasshopper.Kernel.Types;
@@ -29,10 +29,7 @@ namespace DiGi.Communication.Rhino.Classes
             Value = scatteringPointGroup;
         }
 
-        /// <summary>
-        /// Gets the collection of geometries associated with the scattering point group.
-        /// </summary>
-        /// <returns>An array of <see cref="IGeometry"/> objects, or null if no value is present.</returns>
+        /// <summary> Gets the collection of geometries associated with the scattering point group. </summary>
         public override IGeometry[]? Geometries
         {
             get
@@ -64,3 +61,4 @@ namespace DiGi.Communication.Rhino.Classes
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
 }
+

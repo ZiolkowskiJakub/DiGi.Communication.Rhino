@@ -1,4 +1,4 @@
-﻿using DiGi.Communication.Classes;
+using DiGi.Communication.Classes;
 using DiGi.Communication.Interfaces;
 using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
@@ -31,10 +31,7 @@ namespace DiGi.Communication.Rhino.Classes
             Value = scatteringProfile;
         }
 
-        /// <summary>
-        /// Gets the geometries associated with the scattering profile.
-        /// </summary>
-        /// <returns>An array of <see cref="IGeometry"/> objects, or null if no geometries can be generated.</returns>
+        /// <summary> Gets the geometries associated with the scattering profile. </summary>
         public override IGeometry[]? Geometries
         {
             get
@@ -98,12 +95,10 @@ namespace DiGi.Communication.Rhino.Classes
     /// </summary>
     public class GooScatteringProfileParam : GooBakeAwareSerializableParam<GooScatteringProfile, IScatteringProfile>
     {
-        /// <summary>
-        /// Gets the unique identifier for the component.
-        /// </summary>
-        /// <returns>The <see cref="Guid"/> of the component.</returns>
+        /// <summary> Gets the unique identifier for the component. </summary>
         public override Guid ComponentGuid => new("6568b5cb-7b25-4ff7-ad94-613e3562db78");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
 }
+

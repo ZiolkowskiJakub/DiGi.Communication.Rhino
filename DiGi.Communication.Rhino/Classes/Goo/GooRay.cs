@@ -1,4 +1,4 @@
-﻿using DiGi.Communication.Classes;
+using DiGi.Communication.Classes;
 using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
 using DiGi.Rhino.Geometry.Core.Classes;
@@ -29,10 +29,7 @@ namespace DiGi.Communication.Rhino.Classes
             Value = ray;
         }
 
-        /// <summary>
-        /// Gets the geometric representations associated with this GooRay.
-        /// </summary>
-        /// <returns>An array of <see cref="IGeometry"/> objects, or null if the Ray value is invalid.</returns>
+        /// <summary> Gets the geometric representations associated with this GooRay. </summary>
         public override IGeometry[]? Geometries
         {
             get
@@ -68,12 +65,10 @@ namespace DiGi.Communication.Rhino.Classes
     /// </summary>
     public class GooRayParam : GooBakeAwareSerializableParam<GooRay, Ray>
     {
-        /// <summary>
-        /// Gets the unique identifier for the GooRay component.
-        /// </summary>
-        /// <returns>The Guid of the component.</returns>
+        /// <summary> Gets the unique identifier for the GooRay component. </summary>
         public override Guid ComponentGuid => new("5d3b6300-2aac-4ea5-9d6e-f009857c568a");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
 }
+
