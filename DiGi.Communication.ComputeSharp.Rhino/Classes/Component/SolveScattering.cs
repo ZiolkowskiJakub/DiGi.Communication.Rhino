@@ -1,4 +1,4 @@
-﻿using DiGi.Communication.Rhino.Classes;
+using DiGi.Communication.Rhino.Classes;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
@@ -129,12 +129,7 @@ namespace DiGi.Communication.ComputeSharp.Rhino.Classes
 
             geometricalPropagationModel = new Communication.Classes.GeometricalPropagationModel(geometricalPropagationModel);
 
-            ComputeSharp.Classes.ScatteringSolverOptions scatteringSolverOptions = new()
-            {
-                PointDensityFactor = pointDensityFactor,
-                AngleFactor = angleFactor,
-                Tolerance = tolerance,
-            };
+            Communication.Classes.ScatteringSolverOptions scatteringSolverOptions = new(angleFactor, pointDensityFactor, tolerance);
 
             ComputeSharp.Classes.ScatteringSolver scatteringSolver = new()
             {
