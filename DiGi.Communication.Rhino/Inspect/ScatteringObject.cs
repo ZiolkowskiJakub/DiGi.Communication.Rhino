@@ -39,19 +39,35 @@ namespace DiGi.Communication.Rhino
         }
 
         /// <summary>
-        /// Retrieves the scattering coefficient of the scattering object as a <see cref="GH_Number"/>.
+        /// Retrieves the relative permittivity of the scattering object as a <see cref="GH_Number"/>.
         /// </summary>
         /// <param name="scatteringObject">The <see cref="Interfaces.IScatteringObject"/> to inspect.</param>
-        /// <returns>A <see cref="GH_Number"/> containing the coefficient, or <c>null</c> if the scattering object is null.</returns>
-        [Inspect("ScatteringCoefficient", "ScatteringCoefficient", "Scattering coefficient")]
-        public static GH_Number? ScatteringCoefficient(this Interfaces.IScatteringObject? scatteringObject)
+        /// <returns>A <see cref="GH_Number"/> containing the relative permittivity [-], or <c>null</c> if the scattering object is null.</returns>
+        [Inspect("RelativePermittivity", "RelativePermittivity", "Relative permittivity [-]")]
+        public static GH_Number? RelativePermittivity(this Interfaces.IScatteringObject? scatteringObject)
         {
             if (scatteringObject == null)
             {
                 return null;
             }
 
-            return new GH_Number(scatteringObject.ScatteringCoefficient);
+            return new GH_Number(scatteringObject.RelativePermittivity);
+        }
+
+        /// <summary>
+        /// Retrieves the electrical conductivity of the scattering object as a <see cref="GH_Number"/>.
+        /// </summary>
+        /// <param name="scatteringObject">The <see cref="Interfaces.IScatteringObject"/> to inspect.</param>
+        /// <returns>A <see cref="GH_Number"/> containing the electrical conductivity [S/m], or <c>null</c> if the scattering object is null.</returns>
+        [Inspect("ElectricalConductivity", "ElectricalConductivity", "Electrical conductivity [S/m]")]
+        public static GH_Number? ElectricalConductivity(this Interfaces.IScatteringObject? scatteringObject)
+        {
+            if (scatteringObject == null)
+            {
+                return null;
+            }
+
+            return new GH_Number(scatteringObject.ElectricalConductivity);
         }
     }
 }

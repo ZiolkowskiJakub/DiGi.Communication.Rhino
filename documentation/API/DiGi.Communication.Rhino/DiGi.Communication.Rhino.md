@@ -161,6 +161,27 @@ The simple multipath power delay profile instance\.
 [System\.Collections\.IEnumerable](https://learn.microsoft.com/en-us/dotnet/api/system.collections.ienumerable 'System\.Collections\.IEnumerable')  
 A collection of GH\_Number representing the delays in micrometers, or null if the input is null\.
 
+<a name='DiGi.Communication.Rhino.Inspect.ElectricalConductivity(thisDiGi.Communication.Interfaces.IScatteringObject)'></a>
+
+## Inspect\.ElectricalConductivity\(this IScatteringObject\) Method
+
+Retrieves the electrical conductivity of the scattering object as a [Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number')\.
+
+```csharp
+public static GH_Number? ElectricalConductivity(this DiGi.Communication.Interfaces.IScatteringObject? scatteringObject);
+```
+#### Parameters
+
+<a name='DiGi.Communication.Rhino.Inspect.ElectricalConductivity(thisDiGi.Communication.Interfaces.IScatteringObject).scatteringObject'></a>
+
+`scatteringObject` [DiGi\.Communication\.Interfaces\.IScatteringObject](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.interfaces.iscatteringobject 'DiGi\.Communication\.Interfaces\.IScatteringObject')
+
+The [DiGi\.Communication\.Interfaces\.IScatteringObject](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.interfaces.iscatteringobject 'DiGi\.Communication\.Interfaces\.IScatteringObject') to inspect\.
+
+#### Returns
+[Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number')  
+A [Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number') containing the electrical conductivity \[S/m\], or `null` if the scattering object is null\.
+
 <a name='DiGi.Communication.Rhino.Inspect.Ellipsoids(thisDiGi.Communication.Interfaces.IScatteringProfile)'></a>
 
 ## Inspect\.Ellipsoids\(this IScatteringProfile\) Method
@@ -455,18 +476,18 @@ The [DiGi\.Communication\.Interfaces\.IScatteringObject](https://learn.microsoft
 [Grasshopper\.Kernel\.Types\.GH\_String](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_string 'Grasshopper\.Kernel\.Types\.GH\_String')  
 A [Grasshopper\.Kernel\.Types\.GH\_String](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_string 'Grasshopper\.Kernel\.Types\.GH\_String') containing the reference, or `null` if the scattering object is null\.
 
-<a name='DiGi.Communication.Rhino.Inspect.ScatteringCoefficient(thisDiGi.Communication.Interfaces.IScatteringObject)'></a>
+<a name='DiGi.Communication.Rhino.Inspect.RelativePermittivity(thisDiGi.Communication.Interfaces.IScatteringObject)'></a>
 
-## Inspect\.ScatteringCoefficient\(this IScatteringObject\) Method
+## Inspect\.RelativePermittivity\(this IScatteringObject\) Method
 
-Retrieves the scattering coefficient of the scattering object as a [Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number')\.
+Retrieves the relative permittivity of the scattering object as a [Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number')\.
 
 ```csharp
-public static GH_Number? ScatteringCoefficient(this DiGi.Communication.Interfaces.IScatteringObject? scatteringObject);
+public static GH_Number? RelativePermittivity(this DiGi.Communication.Interfaces.IScatteringObject? scatteringObject);
 ```
 #### Parameters
 
-<a name='DiGi.Communication.Rhino.Inspect.ScatteringCoefficient(thisDiGi.Communication.Interfaces.IScatteringObject).scatteringObject'></a>
+<a name='DiGi.Communication.Rhino.Inspect.RelativePermittivity(thisDiGi.Communication.Interfaces.IScatteringObject).scatteringObject'></a>
 
 `scatteringObject` [DiGi\.Communication\.Interfaces\.IScatteringObject](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.interfaces.iscatteringobject 'DiGi\.Communication\.Interfaces\.IScatteringObject')
 
@@ -474,7 +495,7 @@ The [DiGi\.Communication\.Interfaces\.IScatteringObject](https://learn.microsoft
 
 #### Returns
 [Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number')  
-A [Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number') containing the coefficient, or `null` if the scattering object is null\.
+A [Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number') containing the relative permittivity \[\-\], or `null` if the scattering object is null\.
 
 <a name='DiGi.Communication.Rhino.Inspect.ScatteringObjects(thisDiGi.Communication.Classes.GeometricalPropagationModel)'></a>
 

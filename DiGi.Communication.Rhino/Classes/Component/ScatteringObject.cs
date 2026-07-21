@@ -47,7 +47,8 @@ namespace DiGi.Communication.Rhino.Classes
                 [
                     new Param(new GooMesh3DParam() { Name = "Mesh3D", NickName = "Mesh3D", Description = "DiGi Geometry Mesh3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
                     new Param(new Param_String() { Name = "Reference", NickName = "Reference", Description = "Reference", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
-                    new Param(new Param_Number() { Name = "ScatteringCoefficient", NickName = "ScatteringCoefficient", Description = "ScatteringCoefficient", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                    new Param(new Param_Number() { Name = "RelativePermittivity", NickName = "RelativePermittivity", Description = "Relative permittivity [-]", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                    new Param(new Param_Number() { Name = "ElectricalConductivity", NickName = "ElectricalConductivity", Description = "Electrical conductivity [S/m]", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
                 ];
 
                 return [.. result];
@@ -94,17 +95,27 @@ namespace DiGi.Communication.Rhino.Classes
                 dataAccess.GetData(index, ref reference);
             }
 
-            double scatteringCoefficient = 1;
-            index = Params.IndexOfInputParam("ScatteringCoefficient");
+            double relativePermittivity = 1;
+            index = Params.IndexOfInputParam("RelativePermittivity");
             if (index != -1)
             {
-                if (!dataAccess.GetData(index, ref scatteringCoefficient))
+                if (!dataAccess.GetData(index, ref relativePermittivity))
                 {
-                    scatteringCoefficient = 1;
+                    relativePermittivity = 1;
                 }
             }
 
-            Communication.Classes.ScatteringObject scatteringObject = new(reference, mesh3D, scatteringCoefficient);
+            double electricalConductivity = 0;
+            index = Params.IndexOfInputParam("ElectricalConductivity");
+            if (index != -1)
+            {
+                if (!dataAccess.GetData(index, ref electricalConductivity))
+                {
+                    electricalConductivity = 0;
+                }
+            }
+
+            Communication.Classes.ScatteringObject scatteringObject = new(reference, mesh3D, relativePermittivity, electricalConductivity);
 
             index = Params.IndexOfOutputParam("ScatteringObject");
             if (index != -1)
