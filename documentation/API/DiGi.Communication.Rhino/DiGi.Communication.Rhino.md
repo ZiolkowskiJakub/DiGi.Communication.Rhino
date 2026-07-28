@@ -161,27 +161,6 @@ The simple multipath power delay profile instance\.
 [System\.Collections\.IEnumerable](https://learn.microsoft.com/en-us/dotnet/api/system.collections.ienumerable 'System\.Collections\.IEnumerable')  
 A collection of GH\_Number representing the delays in micrometers, or null if the input is null\.
 
-<a name='DiGi.Communication.Rhino.Inspect.ElectricalConductivity(thisDiGi.Communication.Interfaces.IScatteringObject)'></a>
-
-## Inspect\.ElectricalConductivity\(this IScatteringObject\) Method
-
-Retrieves the electrical conductivity of the scattering object as a [Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number')\.
-
-```csharp
-public static GH_Number? ElectricalConductivity(this DiGi.Communication.Interfaces.IScatteringObject? scatteringObject);
-```
-#### Parameters
-
-<a name='DiGi.Communication.Rhino.Inspect.ElectricalConductivity(thisDiGi.Communication.Interfaces.IScatteringObject).scatteringObject'></a>
-
-`scatteringObject` [DiGi\.Communication\.Interfaces\.IScatteringObject](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.interfaces.iscatteringobject 'DiGi\.Communication\.Interfaces\.IScatteringObject')
-
-The [DiGi\.Communication\.Interfaces\.IScatteringObject](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.interfaces.iscatteringobject 'DiGi\.Communication\.Interfaces\.IScatteringObject') to inspect\.
-
-#### Returns
-[Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number')  
-A [Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number') containing the electrical conductivity \[S/m\], or `null` if the scattering object is null\.
-
 <a name='DiGi.Communication.Rhino.Inspect.Ellipsoids(thisDiGi.Communication.Interfaces.IScatteringProfile)'></a>
 
 ## Inspect\.Ellipsoids\(this IScatteringProfile\) Method
@@ -350,48 +329,6 @@ The geometrical propagation model to inspect\.
 [System\.Collections\.IEnumerable](https://learn.microsoft.com/en-us/dotnet/api/system.collections.ienumerable 'System\.Collections\.IEnumerable')  
 A collection of [GooMultipathPowerDelayProfile](DiGi.Communication.Rhino.Classes.Goo.md#DiGi.Communication.Rhino.Classes.Goo.GooMultipathPowerDelayProfile 'DiGi\.Communication\.Rhino\.Classes\.Goo\.GooMultipathPowerDelayProfile') objects, or null if the model is null or contains no profiles\.
 
-<a name='DiGi.Communication.Rhino.Inspect.Point(thisDiGi.Communication.Classes.Ray)'></a>
-
-## Inspect\.Point\(this Ray\) Method
-
-Extracts the point from the specified [DiGi\.Communication\.Classes\.Ray](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.classes.ray 'DiGi\.Communication\.Classes\.Ray') and converts it to a [DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooPoint3D](https://learn.microsoft.com/en-us/dotnet/api/digi.rhino.geometry.spatial.classes.goopoint3d 'DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooPoint3D')\.
-
-```csharp
-public static DiGi.Rhino.Geometry.Spatial.Classes.GooPoint3D? Point(this DiGi.Communication.Classes.Ray? ray);
-```
-#### Parameters
-
-<a name='DiGi.Communication.Rhino.Inspect.Point(thisDiGi.Communication.Classes.Ray).ray'></a>
-
-`ray` [DiGi\.Communication\.Classes\.Ray](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.classes.ray 'DiGi\.Communication\.Classes\.Ray')
-
-The [DiGi\.Communication\.Classes\.Ray](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.classes.ray 'DiGi\.Communication\.Classes\.Ray') to extract the point from\.
-
-#### Returns
-[DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooPoint3D](https://learn.microsoft.com/en-us/dotnet/api/digi.rhino.geometry.spatial.classes.goopoint3d 'DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooPoint3D')  
-A [DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooPoint3D](https://learn.microsoft.com/en-us/dotnet/api/digi.rhino.geometry.spatial.classes.goopoint3d 'DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooPoint3D') representing the ray's origin point, or [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null') if the ray is null or the point is null\.
-
-<a name='DiGi.Communication.Rhino.Inspect.Power(thisDiGi.Communication.Interfaces.IAngularPowerDistribution)'></a>
-
-## Inspect\.Power\(this IAngularPowerDistribution\) Method
-
-Gets the power value for the specified angular power distribution\.
-
-```csharp
-public static GH_Number? Power(this DiGi.Communication.Interfaces.IAngularPowerDistribution? angularPowerDistribution);
-```
-#### Parameters
-
-<a name='DiGi.Communication.Rhino.Inspect.Power(thisDiGi.Communication.Interfaces.IAngularPowerDistribution).angularPowerDistribution'></a>
-
-`angularPowerDistribution` [DiGi\.Communication\.Interfaces\.IAngularPowerDistribution](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.interfaces.iangularpowerdistribution 'DiGi\.Communication\.Interfaces\.IAngularPowerDistribution')
-
-The angular power distribution instance\.
-
-#### Returns
-[Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number')  
-The power as a GH\_Number, or null if the input is null\.
-
 <a name='DiGi.Communication.Rhino.Inspect.Powers(thisDiGi.Communication.Interfaces.ISimpleMultipathPowerDelayProfile)'></a>
 
 ## Inspect\.Powers\(this ISimpleMultipathPowerDelayProfile\) Method
@@ -432,7 +369,7 @@ The angular power distribution profile\.
 
 #### Returns
 [System\.Collections\.IEnumerable](https://learn.microsoft.com/en-us/dotnet/api/system.collections.ienumerable 'System\.Collections\.IEnumerable')  
-A collection of GooRay objects, or null if the profile or location is null\.
+A collection of GooRay3D objects, or null if the profile or location is null\.
 
 <a name='DiGi.Communication.Rhino.Inspect.Reference(thisDiGi.Communication.Classes.ScatteringPointGroup)'></a>
 
@@ -475,27 +412,6 @@ The [DiGi\.Communication\.Interfaces\.IScatteringObject](https://learn.microsoft
 #### Returns
 [Grasshopper\.Kernel\.Types\.GH\_String](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_string 'Grasshopper\.Kernel\.Types\.GH\_String')  
 A [Grasshopper\.Kernel\.Types\.GH\_String](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_string 'Grasshopper\.Kernel\.Types\.GH\_String') containing the reference, or `null` if the scattering object is null\.
-
-<a name='DiGi.Communication.Rhino.Inspect.RelativePermittivity(thisDiGi.Communication.Interfaces.IScatteringObject)'></a>
-
-## Inspect\.RelativePermittivity\(this IScatteringObject\) Method
-
-Retrieves the relative permittivity of the scattering object as a [Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number')\.
-
-```csharp
-public static GH_Number? RelativePermittivity(this DiGi.Communication.Interfaces.IScatteringObject? scatteringObject);
-```
-#### Parameters
-
-<a name='DiGi.Communication.Rhino.Inspect.RelativePermittivity(thisDiGi.Communication.Interfaces.IScatteringObject).scatteringObject'></a>
-
-`scatteringObject` [DiGi\.Communication\.Interfaces\.IScatteringObject](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.interfaces.iscatteringobject 'DiGi\.Communication\.Interfaces\.IScatteringObject')
-
-The [DiGi\.Communication\.Interfaces\.IScatteringObject](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.interfaces.iscatteringobject 'DiGi\.Communication\.Interfaces\.IScatteringObject') to inspect\.
-
-#### Returns
-[Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number')  
-A [Grasshopper\.Kernel\.Types\.GH\_Number](https://learn.microsoft.com/en-us/dotnet/api/grasshopper.kernel.types.gh_number 'Grasshopper\.Kernel\.Types\.GH\_Number') containing the relative permittivity \[\-\], or `null` if the scattering object is null\.
 
 <a name='DiGi.Communication.Rhino.Inspect.ScatteringObjects(thisDiGi.Communication.Classes.GeometricalPropagationModel)'></a>
 
@@ -602,27 +518,6 @@ The scattering profile to inspect\.
 [System\.Collections\.IEnumerable](https://learn.microsoft.com/en-us/dotnet/api/system.collections.ienumerable 'System\.Collections\.IEnumerable')  
 An [System\.Collections\.IEnumerable](https://learn.microsoft.com/en-us/dotnet/api/system.collections.ienumerable 'System\.Collections\.IEnumerable') of [GooScattering](DiGi.Communication.Rhino.Classes.md#DiGi.Communication.Rhino.Classes.GooScattering 'DiGi\.Communication\.Rhino\.Classes\.GooScattering') objects, or null if the profile or scatterings are null\.
 
-<a name='DiGi.Communication.Rhino.Inspect.Segment(thisDiGi.Communication.Classes.Ray)'></a>
-
-## Inspect\.Segment\(this Ray\) Method
-
-Creates a segment from the specified [DiGi\.Communication\.Classes\.Ray](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.classes.ray 'DiGi\.Communication\.Classes\.Ray') and converts it to a [DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooSegment3D](https://learn.microsoft.com/en-us/dotnet/api/digi.rhino.geometry.spatial.classes.goosegment3d 'DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooSegment3D')\.
-
-```csharp
-public static DiGi.Rhino.Geometry.Spatial.Classes.GooSegment3D? Segment(this DiGi.Communication.Classes.Ray? ray);
-```
-#### Parameters
-
-<a name='DiGi.Communication.Rhino.Inspect.Segment(thisDiGi.Communication.Classes.Ray).ray'></a>
-
-`ray` [DiGi\.Communication\.Classes\.Ray](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.classes.ray 'DiGi\.Communication\.Classes\.Ray')
-
-The [DiGi\.Communication\.Classes\.Ray](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.classes.ray 'DiGi\.Communication\.Classes\.Ray') used to define the segment\.
-
-#### Returns
-[DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooSegment3D](https://learn.microsoft.com/en-us/dotnet/api/digi.rhino.geometry.spatial.classes.goosegment3d 'DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooSegment3D')  
-A [DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooSegment3D](https://learn.microsoft.com/en-us/dotnet/api/digi.rhino.geometry.spatial.classes.goosegment3d 'DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooSegment3D') representing the ray's point and vector, or [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null') if the ray, its point, or its vector is null\.
-
 <a name='DiGi.Communication.Rhino.Inspect.SimpleMultipathPowerDelayProfile_Hidden(thisDiGi.Communication.Interfaces.IComplexMultipathPowerDelayProfile)'></a>
 
 ## Inspect\.SimpleMultipathPowerDelayProfile\_Hidden\(this IComplexMultipathPowerDelayProfile\) Method
@@ -664,27 +559,6 @@ The complex multipath power delay profile to inspect\.
 #### Returns
 [GooSimpleMultipathPowerDelayProfile](DiGi.Communication.Rhino.Classes.Goo.md#DiGi.Communication.Rhino.Classes.Goo.GooSimpleMultipathPowerDelayProfile 'DiGi\.Communication\.Rhino\.Classes\.Goo\.GooSimpleMultipathPowerDelayProfile')  
 A [GooSimpleMultipathPowerDelayProfile](DiGi.Communication.Rhino.Classes.Goo.md#DiGi.Communication.Rhino.Classes.Goo.GooSimpleMultipathPowerDelayProfile 'DiGi\.Communication\.Rhino\.Classes\.Goo\.GooSimpleMultipathPowerDelayProfile') instance if successful; otherwise, null\.
-
-<a name='DiGi.Communication.Rhino.Inspect.Vector(thisDiGi.Communication.Classes.Ray)'></a>
-
-## Inspect\.Vector\(this Ray\) Method
-
-Extracts the vector from the specified [DiGi\.Communication\.Classes\.Ray](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.classes.ray 'DiGi\.Communication\.Classes\.Ray') and converts it to a [DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooVector3D](https://learn.microsoft.com/en-us/dotnet/api/digi.rhino.geometry.spatial.classes.goovector3d 'DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooVector3D')\.
-
-```csharp
-public static DiGi.Rhino.Geometry.Spatial.Classes.GooVector3D? Vector(this DiGi.Communication.Classes.Ray? ray);
-```
-#### Parameters
-
-<a name='DiGi.Communication.Rhino.Inspect.Vector(thisDiGi.Communication.Classes.Ray).ray'></a>
-
-`ray` [DiGi\.Communication\.Classes\.Ray](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.classes.ray 'DiGi\.Communication\.Classes\.Ray')
-
-The [DiGi\.Communication\.Classes\.Ray](https://learn.microsoft.com/en-us/dotnet/api/digi.communication.classes.ray 'DiGi\.Communication\.Classes\.Ray') to extract the vector from\.
-
-#### Returns
-[DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooVector3D](https://learn.microsoft.com/en-us/dotnet/api/digi.rhino.geometry.spatial.classes.goovector3d 'DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooVector3D')  
-A [DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooVector3D](https://learn.microsoft.com/en-us/dotnet/api/digi.rhino.geometry.spatial.classes.goovector3d 'DiGi\.Rhino\.Geometry\.Spatial\.Classes\.GooVector3D') representing the ray's vector, or [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null') if the ray is null or the vector is null\.
 
 <a name='DiGi.Communication.Rhino.Inspect.Vectors(thisDiGi.Communication.Interfaces.IAngularPowerDistribution)'></a>
 

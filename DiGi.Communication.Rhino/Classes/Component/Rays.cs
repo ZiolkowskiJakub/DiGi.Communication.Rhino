@@ -1,7 +1,9 @@
-﻿using DiGi.Communication.Classes;
+using DiGi.Communication.Classes;
 using DiGi.Communication.Interfaces;
+using DiGi.Geometry.Spatial.Classes;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
+using DiGi.Rhino.Geometry.Spatial.Classes;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
 using System;
@@ -63,7 +65,7 @@ namespace DiGi.Communication.Rhino.Classes
             {
                 List<Param> result =
                 [
-                    new Param(new GooRayParam() { Name = "Rays", NickName = "Rays", Description = "DiGi Rays", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                    new Param(new GooRay3DParam() { Name = "Rays", NickName = "Rays", Description = "DiGi Rays", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
                 ];
                 return [.. result];
             }
@@ -107,12 +109,12 @@ namespace DiGi.Communication.Rhino.Classes
 
             delay = Core.Query.Round(delay * 1e-6, 1e-12);
 
-            List<Ray>? rays = Query.Scale(angularPowerDistributionProfile.GetRays(delay), factor);
+            List<Ray3D>? rays = DiGi.Geometry.Spatial.Query.Scale(angularPowerDistributionProfile.GetRays(delay), factor);
 
             index = Params.IndexOfOutputParam("Rays");
             if (index != -1)
             {
-                dataAccess.SetDataList(index, rays?.ConvertAll(x => new GooRay(x)));
+                dataAccess.SetDataList(index, rays?.ConvertAll(x => new GooRay3D(x)));
             }
         }
     }

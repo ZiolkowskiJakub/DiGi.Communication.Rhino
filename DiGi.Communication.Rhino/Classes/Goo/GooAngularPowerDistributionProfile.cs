@@ -31,7 +31,8 @@ namespace DiGi.Communication.Rhino.Classes
             Value = angularPowerDistributionProfile;
         }
 
-        /// <summary> Gets the geometries associated with the angular power distribution profile. </summary>
+        /// <summary> Gets the geometries associated with the angular power distribution profile. </summary>
+
         public override IGeometry[]? Geometries
         {
             get
@@ -47,8 +48,7 @@ namespace DiGi.Communication.Rhino.Classes
                 List<IGeometry> geometries = [];
                 foreach (AngularPowerDistribution angularPowerDistribution in angularPowerDistributions)
                 {
-                    List<Vector3D>? vector3Ds = angularPowerDistribution.Vectors;
-                    if (vector3Ds == null)
+                    if (angularPowerDistribution.Vectors is not IEnumerable<Vector3D> vector3Ds)
                     {
                         continue;
                     }
@@ -78,7 +78,8 @@ namespace DiGi.Communication.Rhino.Classes
     /// </summary>
     public class GooAngularPowerDistributionProfileParam : GooBakeAwareSerializableParam<GooAngularPowerDistributionProfile, IAngularPowerDistributionProfile>
     {
-        /// <summary> Gets the unique identifier for the component. </summary>
+        /// <summary> Gets the unique identifier for the component. </summary>
+
         public override Guid ComponentGuid => new("493c2a67-0e30-47bd-bb35-df3defbc9f0d");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;

@@ -1,5 +1,6 @@
-﻿using DiGi.Communication.Classes;
+using DiGi.Communication.Classes;
 using DiGi.Communication.Rhino.Classes;
+using DiGi.Geometry.Spatial.Classes;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Geometry.Spatial.Classes;
 using Grasshopper.Kernel.Types;
@@ -75,7 +76,7 @@ namespace DiGi.Communication.Rhino
         /// Gets the rays associated with the specified angular power distribution profile.
         /// </summary>
         /// <param name="angularPowerDistributionProfile">The angular power distribution profile.</param>
-        /// <returns>A collection of GooRay objects, or null if the profile or location is null.</returns>
+        /// <returns>A collection of GooRay3D objects, or null if the profile or location is null.</returns>
         [Inspect("Rays", "Rays", "Rays")]
         public static IEnumerable? Rays(this Interfaces.IAngularPowerDistributionProfile? angularPowerDistributionProfile)
         {
@@ -99,8 +100,7 @@ namespace DiGi.Communication.Rhino
             List<Geometry.Spatial.Classes.Vector3D> vector3Ds = [];
             foreach (AngularPowerDistribution angularPowerDistribution in angularPowerDistributions)
             {
-                List<Geometry.Spatial.Classes.Vector3D>? vector3Ds_Temp = angularPowerDistribution?.Vectors;
-                if (vector3Ds_Temp == null)
+                if (angularPowerDistribution?.Vectors is not IEnumerable<Vector3D> vector3Ds_Temp)
                 {
                     continue;
                 }
@@ -108,7 +108,7 @@ namespace DiGi.Communication.Rhino
                 vector3Ds.AddRange(vector3Ds_Temp);
             }
 
-            return vector3Ds.ConvertAll(x => new GooRay(new Ray(location, x)));
+            return vector3Ds.ConvertAll(x => new GooRay3D(new Ray3D(location, x)));
         }
     }
 }

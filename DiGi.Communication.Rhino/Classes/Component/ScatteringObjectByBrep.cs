@@ -1,4 +1,4 @@
-﻿using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Classes;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
@@ -46,8 +46,6 @@ namespace DiGi.Communication.Rhino.Classes
                 [
                     new Param(new Param_Brep() { Name = "Brep", NickName = "Brep", Description = "Brep", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
                     new Param(new Param_String() { Name = "Reference", NickName = "Reference", Description = "Reference", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
-                    new Param(new Param_Number() { Name = "RelativePermittivity", NickName = "RelativePermittivity", Description = "Relative permittivity [-]", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
-                    new Param(new Param_Number() { Name = "ElectricalConductivity", NickName = "ElectricalConductivity", Description = "Electrical conductivity [S/m]", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
                 ];
 
                 return [.. result];
@@ -94,26 +92,6 @@ namespace DiGi.Communication.Rhino.Classes
                 dataAccess.GetData(index, ref reference);
             }
 
-            double relativePermittivity = 1;
-            index = Params.IndexOfInputParam("RelativePermittivity");
-            if (index != -1)
-            {
-                if (!dataAccess.GetData(index, ref relativePermittivity))
-                {
-                    relativePermittivity = 1;
-                }
-            }
-
-            double electricalConductivity = 0;
-            index = Params.IndexOfInputParam("ElectricalConductivity");
-            if (index != -1)
-            {
-                if (!dataAccess.GetData(index, ref electricalConductivity))
-                {
-                    electricalConductivity = 0;
-                }
-            }
-
             global::Rhino.Geometry.Mesh[] meshes = global::Rhino.Geometry.Mesh.CreateFromBrep(brep, new global::Rhino.Geometry.MeshingParameters(0.5));
 
             List<Communication.Classes.ScatteringObject>? scatteringObjects = null;
@@ -128,7 +106,7 @@ namespace DiGi.Communication.Rhino.Classes
                         continue;
                     }
 
-                    Communication.Classes.ScatteringObject scatteringObject = new(reference, mesh3D, relativePermittivity, electricalConductivity);
+                    Communication.Classes.ScatteringObject scatteringObject = new(reference, mesh3D, Constants.ElectricalProperties.Concrete);
                     scatteringObjects.Add(scatteringObject);
                 }
             }

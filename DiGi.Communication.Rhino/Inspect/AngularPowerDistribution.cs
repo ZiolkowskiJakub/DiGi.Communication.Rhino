@@ -1,7 +1,8 @@
-﻿using DiGi.Rhino.Core.Classes;
+using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Geometry.Spatial.Classes;
 using Grasshopper.Kernel.Types;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace DiGi.Communication.Rhino
 {
@@ -15,12 +16,25 @@ namespace DiGi.Communication.Rhino
         [Inspect("Vectors", "Vectors", "Vectors")]
         public static IEnumerable? Vectors(this Interfaces.IAngularPowerDistribution? angularPowerDistribution)
         {
-            if (angularPowerDistribution == null)
+            if (angularPowerDistribution == null) 
             {
                 return null;
             }
 
-            return angularPowerDistribution.Vectors?.ConvertAll(x => new GooVector3D(x));
+            if (angularPowerDistribution.Vectors is not IEnumerable<Geometry.Spatial.Classes.Vector3D> vector3Ds)
+            {
+                return null;
+            }
+
+            List<GooVector3D> result = [];
+
+            foreach(Geometry.Spatial.Classes.Vector3D vector3D in vector3Ds)
+            {
+                result.Add(new GooVector3D(vector3D));
+            }
+
+            return result;
+            //return angularPowerDistribution.Vectors?.ConvertAll(x => new GooVector3D(x));
         }
 
         /// <summary>
@@ -37,22 +51,6 @@ namespace DiGi.Communication.Rhino
             }
 
             return new GH_Number(angularPowerDistribution.Delay * 1e6);
-        }
-
-        /// <summary>
-        /// Gets the power value for the specified angular power distribution.
-        /// </summary>
-        /// <param name="angularPowerDistribution">The angular power distribution instance.</param>
-        /// <returns>The power as a GH_Number, or null if the input is null.</returns>
-        [Inspect("Power", "Power", "Power")]
-        public static GH_Number? Power(this Interfaces.IAngularPowerDistribution? angularPowerDistribution)
-        {
-            if (angularPowerDistribution == null)
-            {
-                return null;
-            }
-
-            return new GH_Number(angularPowerDistribution.GetPower());
         }
     }
 }
