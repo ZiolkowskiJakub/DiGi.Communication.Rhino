@@ -1,4 +1,4 @@
-﻿using DiGi.Rhino.Core.Classes;
+using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
@@ -44,15 +44,8 @@ namespace DiGi.Communication.Rhino.Classes
                 List<Param> result =
                 [
                     new Param(new GooGeometricalPropagationModelParam() { Name = "GeometricalPropagationModel", NickName = "GeometricalPropagationModel", Description = "GeometricalPropagationModel", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Param_Number() { Name = "Frequency", NickName = "Frequency", Description = "Frequency [Hz]", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
                 ];
-
-                Param_Integer param_Integer = new() { Name = "RayCount", NickName = "RayCount", Description = "Ray count", Access = GH_ParamAccess.item, Optional = true };
-                param_Integer.SetPersistentData(1);
-                result.Add(new Param(param_Integer, ParameterVisibility.Voluntary));
-
-                Param_Number param_Number = new() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(Core.Constants.Tolerance.Distance);
-                result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
                 return [.. result];
             }
@@ -99,26 +92,18 @@ namespace DiGi.Communication.Rhino.Classes
                 return;
             }
 
-            int rayCount = 1;
-            index = Params.IndexOfInputParam("RayCount");
+            double frequency = double.NaN;
+            index = Params.IndexOfInputParam("Frequency");
             if (index != -1)
             {
-                dataAccess.GetData(index, ref rayCount);
-            }
-
-            double tolerance = Core.Constants.Tolerance.Distance;
-            index = Params.IndexOfInputParam("Tolerance");
-            if (index != -1)
-            {
-                dataAccess.GetData(index, ref tolerance);
+                dataAccess.GetData(index, ref frequency);
             }
 
             geometricalPropagationModel = new Communication.Classes.GeometricalPropagationModel(geometricalPropagationModel);
 
             Communication.Classes.AngularPowerDistributionSolverOptions angularPowerDistributionSolverOptions = new()
             {
-                RayCount = rayCount,
-                Tolerance = tolerance,
+                Frequency = frequency,
             };
 
             Communication.Classes.AngularPowerDistributionSolver angularPowerDistributionSolver = new()
